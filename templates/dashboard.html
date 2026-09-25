@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Phishing Detection | Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 10% 0%, #172554 0%, transparent 35%),
+                radial-gradient(circle at 90% 10%, #312e81 0%, transparent 30%),
+                #020617;
+            color: #f8fafc;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: rgba(2, 6, 23, 0.92);
+            border-bottom: 1px solid rgba(96, 165, 250, 0.20);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(18px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            border-radius: 14px;
+            font-size: 25px;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.30);
+        }
+
+        .brand h2 {
+            font-size: 18px;
+        }
+
+        .brand p {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            background: rgba(15, 23, 42, 0.65);
+            padding: 10px 16px;
+            border-radius: 9px;
+            font-size: 13px;
+            transition: .25s;
+        }
+
+        .logout:hover {
+            color: white;
+            background: #1e293b;
+            border-color: #60a5fa;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 92%;
+            max-width: 1250px;
+            margin: 38px auto;
+        }
+
+        .welcome {
+            margin-bottom: 28px;
+        }
+
+        .welcome small {
+            display: inline-block;
+            color: #60a5fa;
+            background: rgba(37, 99, 235, .10);
+            border: 1px solid rgba(96, 165, 250, .18);
+            padding: 6px 11px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            margin-bottom: 12px;
+        }
+
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* STATISTICS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 17px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                145deg,
+                rgba(15, 23, 42, .96),
+                rgba(15, 23, 42, .72)
+            );
+            border: 1px solid #1e3a5f;
+            border-radius: 16px;
+            padding: 21px;
+            transition: .3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .30);
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .stat-icon {
+            width: 43px;
+            height: 43px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 11px;
+            font-size: 21px;
+            background: #0f172a;
+            border: 1px solid #263852;
+        }
+
+        .stat-status {
+            color: #64748b;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .stat-title {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-bottom: 7px;
+            text-transform: uppercase;
+        }
+
+        .stat-number {
+            font-size: 31px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .stat-description {
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        .blue { color: #60a5fa; }
+        .red { color: #f87171; }
+        .green { color: #4ade80; }
+        .orange { color: #fb923c; }
+
+        /* PANELS */
+
+        .panel {
+            background: rgba(15, 23, 42, .82);
+            border: 1px solid #1e3a5f;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .20);
+        }
+
+        .panel-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 23px;
+        }
+
+        .panel-title h2 {
+            font-size: 18px;
+        }
+
+        .panel-title span {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        /* ANALYSIS */
+
+        .analysis {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .analysis-item {
+            background: rgba(2, 6, 23, .45);
+            border: 1px solid #172a46;
+            border-radius: 12px;
+            padding: 17px;
+        }
+
+        .analysis-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 11px;
+            font-size: 13px;
+        }
+
+        .analysis-label {
+            color: #cbd5e1;
+        }
+
+        .analysis-value {
+            font-weight: bold;
+        }
+
+        .bar {
+            height: 11px;
+            background: #020617;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #1e293b;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: var(--bar-width);
+            border-radius: 20px;
+            transition: width 1s ease;
+        }
+
+        .phishing-bar {
+            background: linear-gradient(90deg, #ef4444, #f97316);
+        }
+
+        .safe-bar {
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+        }
+
+        .risk-bar {
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+        }
+
+        /* ACTIONS */
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            text-decoration: none;
+            padding: 11px 17px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: .25s;
+            border: 1px solid #334155;
+        }
+
+        .history {
+            color: #60a5fa;
+            background: rgba(37, 99, 235, .09);
+        }
+
+        .performance {
+            color: #a78bfa;
+            background: rgba(124, 58, 237, .09);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            border-color: #60a5fa;
+        }
+
+        /* TABLE */
+
+        .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid #172a46;
+            border-radius: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th {
+            text-align: left;
+            color: #64748b;
+            background: #0b1325;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding: 13px;
+            border-bottom: 1px solid #1e3a5f;
+        }
+
+        td {
+            padding: 14px 13px;
+            color: #cbd5e1;
+            font-size: 12px;
+            border-bottom: 1px solid #172033;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(30, 41, 59, .45);
+        }
+
+        .email-text {
+            max-width: 420px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .badge-phishing {
+            background: rgba(239, 68, 68, .12);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, .25);
+        }
+
+        .badge-safe {
+            background: rgba(34, 197, 94, .12);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, .25);
+        }
+
+        /* SECURITY TIP */
+
+        .security-tip {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            background: linear-gradient(
+                135deg,
+                rgba(37, 99, 235, .13),
+                rgba(124, 58, 237, .08)
+            );
+            border: 1px solid rgba(59, 130, 246, .25);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .tip-icon {
+            min-width: 48px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #172554;
+            border-radius: 12px;
+            font-size: 23px;
+        }
+
+        .security-tip h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .security-tip p {
+            color: #94a3b8;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            color: #475569;
+            font-size: 11px;
+            line-height: 1.7;
+            padding: 20px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 950px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .analysis {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 13px 18px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 25px auto;
+            }
+
+            .brand-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 21px;
+            }
+
+            .brand h2 {
+                font-size: 15px;
+            }
+
+            .brand p {
+                font-size: 10px;
+            }
+
+            .logout {
+                padding: 8px 11px;
+                font-size: 11px;
+            }
+
+            .welcome h1 {
+                font-size: 25px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .panel {
+                padding: 17px;
+            }
+
+            .panel-title {
+                align-items: flex-start;
+                gap: 8px;
+                flex-direction: column;
+            }
+
+            .security-tip {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🛡️
+            </div>
+
+            <div>
+
+                <h2>
+                    AI Phishing Detection
+                </h2>
+
+                <p>
+                    Security Administration
+                </p>
+
+            </div>
+
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="logout">
+            🚪 Logout
+        </a>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <small>
+                🔐 Admin Control Center
+            </small>
+
+            <h1>
+                Security Dashboard
+            </h1>
+
+            <p>
+                Monitor email detection activity and machine learning security results.
+            </p>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        📧
+                    </div>
+
+                    <span class="stat-status">
+                        Overall
+                    </span>
+
+                </div>
+
+                <div class="stat-title">
+                    Total Scanned
+                </div>
+
+                <div class="stat-number blue">
+                    {{ total }}
+                </div>
+
+                <div class="stat-description">
+                    Emails analyzed by the system
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        ⚠️
+                    </div>
+
+                    <span class="stat-status">
+                        Threat
+                    </span>
+
+                </div>
+
+                <div class="stat-title">
+                    Phishing Emails
+                </div>
+
+                <div class="stat-number red">
+                    {{ phishing }}
+                </div>
+
+                <div class="stat-description">
+                    Suspicious emails detected
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        ✅
+                    </div>
+
+                    <span class="stat-status">
+                        Safe
+                    </span>
+
+                </div>
+
+                <div class="stat-title">
+                    Safe Emails
+                </div>
+
+                <div class="stat-number green">
+                    {{ safe }}
+                </div>
+
+                <div class="stat-description">
+                    Legitimate emails identified
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        🔥
+                    </div>
+
+                    <span class="stat-status">
+                        Alert
+                    </span>
+
+                </div>
+
+                <div class="stat-title">
+                    High Risk
+                </div>
+
+                <div class="stat-number orange">
+                    {{ high_risk }}
+                </div>
+
+                <div class="stat-description">
+                    High-confidence phishing threats
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DETECTION ANALYSIS -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>
+                    📊 Detection Analysis
+                </h2>
+
+                <span>
+                    Current database statistics
+                </span>
+
+            </div>
+
+
+            <div class="analysis">
+
+                <div class="analysis-item">
+
+                    <div class="analysis-header">
+
+                        <span class="analysis-label">
+                            ⚠️ Phishing
+                        </span>
+
+                        <span class="analysis-value red">
+                            {{ phishing_percent }}%
+                        </span>
+
+                    </div>
+
+                    <div class="bar">
+
+                        <div
+                            class="bar-fill phishing-bar"
+                            style="--bar-width: {{ phishing_percent }}%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analysis-item">
+
+                    <div class="analysis-header">
+
+                        <span class="analysis-label">
+                            ✅ Safe
+                        </span>
+
+                        <span class="analysis-value green">
+                            {{ safe_percent }}%
+                        </span>
+
+                    </div>
+
+                    <div class="bar">
+
+                        <div
+                            class="bar-fill safe-bar"
+                            style="--bar-width: {{ safe_percent }}%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analysis-item">
+
+                    <div class="analysis-header">
+
+                        <span class="analysis-label">
+                            🔥 High Risk
+                        </span>
+
+                        <span class="analysis-value orange">
+                            {{ high_risk_percent }}%
+                        </span>
+
+                    </div>
+
+                    <div class="bar">
+
+                        <div
+                            class="bar-fill risk-bar"
+                            style="--bar-width: {{ high_risk_percent }}%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <a
+                    href="{{ url_for('history') }}"
+                    class="btn history">
+                    📜 Detection History
+                </a>
+
+                <a
+                    href="{{ url_for('model_performance') }}"
+                    class="btn performance">
+                    📈 Model Performance
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT DETECTIONS -->
+
+        <section class="panel">
+
+            <div class="panel-title">
+
+                <h2>
+                    🕒 Recent Detections
+                </h2>
+
+                <span>
+                    Latest email analyses
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Result
+                            </th>
+
+                            <th>
+                                Confidence
+                            </th>
+
+                            <th>
+                                Date & Time
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for record in records %}
+
+                        <tr>
+
+                            <td>
+
+                                <div class="email-text">
+                                    {{ record['email'] }}
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                {% if record['prediction'] == 'Phishing' %}
+
+                                <span class="badge badge-phishing">
+                                    ⚠️ Phishing
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge badge-safe">
+                                    ✓ Safe
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+                                {{ record['confidence'] }}%
+                            </td>
+
+                            <td>
+                                {{ record['created_at'] }}
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td
+                                colspan="4"
+                                style="text-align:center; color:#64748b; padding:25px;">
+                                No detection records yet.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- SECURITY TIP -->
+
+        <section class="security-tip">
+
+            <div class="tip-icon">
+                🛡️
+            </div>
+
+            <div>
+
+                <h3>
+                    Security Awareness Tip
+                </h3>
+
+                <p>
+                    Never click suspicious links, download unknown attachments,
+                    or provide passwords and banking information through
+                    unexpected emails. Always verify the sender before taking action.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        AI-Based Phishing Email Detection System
+        <br>
+
+        Machine Learning Security Monitoring Dashboard
+
+    </footer>
+
+
+</body>
+
+</html>

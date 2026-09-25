@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login - AI Phishing Detection</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    #173b68,
+                    transparent 40%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    #102c50,
+                    transparent 40%
+                ),
+                #07111f;
+
+            color: white;
+
+            padding: 20px;
+        }
+
+        /* LOGIN CARD */
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+
+            background: rgba(11, 29, 51, 0.95);
+
+            border: 1px solid #1e3a5f;
+
+            border-radius: 22px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.45);
+
+            animation: appear 0.6s ease;
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        /* SHIELD */
+
+        .shield {
+            width: 80px;
+            height: 90px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 45px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #12365d,
+                    #0b1d33
+                );
+
+            border: 1px solid #2563eb;
+
+            border-radius:
+                45% 45% 50% 50%;
+
+            box-shadow:
+                0 0 30px rgba(37, 99, 235, 0.25);
+        }
+
+        /* TITLE */
+
+        h1 {
+            text-align: center;
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+        /* STATUS */
+
+        .system-status {
+            text-align: center;
+
+            margin-bottom: 25px;
+
+            color: #60a5fa;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 0.5px;
+        }
+
+        /* ERROR */
+
+        .error {
+            background: rgba(220, 38, 38, 0.12);
+
+            border: 1px solid #7f1d1d;
+
+            color: #fca5a5;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+        /* INPUT */
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 14px 45px 14px 14px;
+
+            background: #07111f;
+
+            color: white;
+
+            border: 2px solid #1e3a5f;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        input::placeholder {
+            color: #64748b;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+        /* SHOW PASSWORD */
+
+        .show-password {
+            position: absolute;
+
+            right: 12px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            background: none;
+
+            border: none;
+
+            color: #60a5fa;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            padding: 3px;
+
+            width: auto;
+
+            margin: 0;
+        }
+
+        .show-password:hover {
+            color: white;
+        }
+
+        /* LOGIN BUTTON */
+
+        .login-button {
+            width: 100%;
+
+            padding: 15px;
+
+            margin-top: 5px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 25px rgba(37, 99, 235, 0.35);
+        }
+
+        /* BACK */
+
+        .back-home {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #94a3b8;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            color: #60a5fa;
+        }
+
+        /* SECURITY NOTE */
+
+        .security-note {
+            margin-top: 25px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #1e3a5f;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 500px) {
+
+            .login-container {
+                padding: 30px 22px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <!-- SHIELD -->
+
+        <div class="shield">
+            🛡️
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h1>
+            Admin Login
+        </h1>
+
+        <p class="subtitle">
+            Secure access to the AI-Based
+            Phishing Email Detection System
+        </p>
+
+
+        <!-- STATUS -->
+
+        <div class="system-status">
+            ● AI SECURITY SYSTEM ONLINE
+        </div>
+
+
+        <!-- ERROR -->
+
+        {% if error %}
+
+        <div class="error">
+            ⚠️ {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <!-- LOGIN FORM -->
+
+        <form
+            method="POST"
+            action="{{ url_for('login') }}">
+
+            <!-- USERNAME -->
+
+            <div class="input-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter username"
+                        required
+                        autocomplete="username">
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="input-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter password"
+                        required
+                        autocomplete="current-password">
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword()"
+                        aria-label="Show password">
+
+                        👁️
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <button
+                type="submit"
+                class="login-button">
+
+                🔐 Secure Login
+
+            </button>
+
+        </form>
+
+
+        <!-- BACK HOME -->
+
+        <a
+            href="{{ url_for('home') }}"
+            class="back-home">
+
+            ← Back to Home
+
+        </a>
+
+
+        <!-- SECURITY NOTE -->
+
+        <div class="security-note">
+
+            🔒 Protected Admin Area
+
+            <br>
+
+            Authorized access only
+
+        </div>
+
+    </div>
+
+
+    <!-- SHOW / HIDE PASSWORD -->
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const button =
+                document.querySelector(".show-password");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                button.textContent = "🙈";
+
+                button.setAttribute(
+                    "aria-label",
+                    "Hide password"
+                );
+
+            } else {
+
+                password.type = "password";
+
+                button.textContent = "👁️";
+
+                button.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

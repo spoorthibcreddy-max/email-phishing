@@ -1,0 +1,6 @@
+date,email,result,confidence,risk2026-08-29 14:04:01,"URGENT! Your bank account has been suspended.
+Verify your account immediately by clicking here:
+http://example.com/login",PHISHING EMAIL,61.13%,MEDIUM RISK
+2026-08-29 14:06:03,"URGENT! Your bank account has been suspended.
+Verify your account immediately by clicking here:
+http://example.com/login",PHISHING EMAIL,61.13%,MEDIUM RISK

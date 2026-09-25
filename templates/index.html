@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Phishing Email Detection</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07111f;
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(4, 12, 24, 0.96);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+
+            border-radius: 12px;
+            font-size: 23px;
+        }
+
+        .logo-text span {
+            color: #38bdf8;
+        }
+
+        .login-btn {
+            text-decoration: none;
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 10px;
+
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* MAIN */
+        .hero {
+            padding: 70px 7% 50px;
+
+            background:
+                radial-gradient(
+                    circle at 85% 30%,
+                    rgba(37, 99, 235, 0.25),
+                    transparent 35%
+                ),
+                #07111f;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            margin: auto;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 35px;
+        }
+
+        /* TEXT */
+        .hero-text-area {
+            width: 100%;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 9px 15px;
+
+            border-radius: 30px;
+
+            background: rgba(14, 45, 76, 0.8);
+
+            color: #67e8f9;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+        }
+
+        h1 {
+            font-size: clamp(40px, 6vw, 64px);
+
+            line-height: 1.1;
+
+            margin-bottom: 20px;
+        }
+
+        h1 .blue {
+            color: #38bdf8;
+        }
+
+        .hero-description {
+            color: #94a3b8;
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            max-width: 800px;
+
+            margin-bottom: 25px;
+        }
+
+        .hero-points {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hero-point {
+            padding: 9px 13px;
+
+            background: rgba(15, 35, 58, 0.75);
+
+            border: 1px solid rgba(96, 165, 250, 0.15);
+
+            border-radius: 8px;
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+        }
+
+        /* ANALYZE EMAIL BOX */
+        .analyze-box {
+            width: 100%;
+
+            background: rgba(8, 24, 42, 0.95);
+
+            border: 1px solid rgba(96, 165, 250, 0.25);
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .analyze-title {
+            font-size: 24px;
+
+            margin-bottom: 10px;
+        }
+
+        .analyze-description {
+            color: #94a3b8;
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+
+            min-height: 180px;
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            border: 1px solid rgba(148, 163, 184, 0.25);
+
+            background: #020817;
+
+            color: white;
+
+            font-size: 15px;
+
+            resize: vertical;
+
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #38bdf8;
+        }
+
+        .detect-btn {
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #06b6d4
+            );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .detect-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* MOBILE */
+        @media (max-width: 700px) {
+
+            header {
+                padding: 15px 5%;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .login-btn {
+                padding: 9px 12px;
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 45px 5%;
+            }
+
+            h1 {
+                font-size: 42px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .analyze-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🛡️
+            </div>
+
+            <div class="logo-text">
+                AI <span>Phishing</span> Detection
+            </div>
+
+        </div>
+
+        <a href="/login" class="login-btn">
+            🔐 Admin Login
+        </a>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+
+            <!-- TEXT COMES FIRST -->
+            <div class="hero-text-area">
+
+                <div class="status">
+                    <span class="status-dot"></span>
+                    AI SECURITY SYSTEM ACTIVE
+                </div>
+
+                <h1>
+                    Detect <span class="blue">Phishing</span><br>
+                    Before It Hurts.
+                </h1>
+
+                <p class="hero-description">
+                    Protect yourself from suspicious emails using
+                    Artificial Intelligence and Machine Learning.
+                    Analyze an email and identify whether it is
+                    legitimate or potentially phishing.
+                </p>
+
+                <div class="hero-points">
+
+                    <div class="hero-point">
+                        ✓ Machine Learning
+                    </div>
+
+                    <div class="hero-point">
+                        ✓ TF-IDF Analysis
+                    </div>
+
+                    <div class="hero-point">
+                        ✓ Real-Time Detection
+                    </div>
+
+                    <div class="hero-point">
+                        ✓ Security Focused
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ANALYZE EMAIL COMES BELOW -->
+            <div class="analyze-box">
+
+                <div class="analyze-title">
+                    📧 Analyze Email
+                </div>
+
+                <p class="analyze-description">
+                    Paste the email content below and let the
+                    AI model analyze it for phishing indicators.
+                </p>
+
+                <form action="/predict" method="POST">
+
+                    <textarea
+                        name="email"
+                        placeholder="Paste suspicious email content here..."
+                        required></textarea>
+
+                    <button type="submit" class="detect-btn">
+                        🛡 Detect Phishing
+                    </button>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Detection Result - AI Phishing Detection</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    #173b68,
+                    transparent 40%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    #102c50,
+                    transparent 40%
+                ),
+                #07111f;
+
+            color: white;
+
+            padding: 30px 20px;
+        }
+
+
+        /* MAIN CONTAINER */
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+
+            margin: 0 auto;
+
+            animation: appear 0.6s ease;
+        }
+
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* HEADER */
+
+        .header {
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .logo {
+            font-size: 45px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .header h1 {
+            font-size: 32px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .header p {
+            color: #94a3b8;
+
+            font-size: 15px;
+        }
+
+
+        /* RESULT CARD */
+
+        .result-card {
+
+            background: rgba(11, 29, 51, 0.96);
+
+            border: 1px solid #1e3a5f;
+
+            border-radius: 22px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+
+        /* RESULT STATUS */
+
+        .result-status {
+
+            text-align: center;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .phishing {
+
+            background: rgba(220, 38, 38, 0.12);
+
+            border: 1px solid #7f1d1d;
+        }
+
+
+        .legitimate {
+
+            background: rgba(22, 163, 74, 0.12);
+
+            border: 1px solid #166534;
+        }
+
+
+        .result-icon {
+
+            font-size: 60px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .result-status h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .phishing h2 {
+
+            color: #f87171;
+        }
+
+
+        .legitimate h2 {
+
+            color: #4ade80;
+        }
+
+
+        .result-status p {
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+        }
+
+
+        /* CONFIDENCE */
+
+        .confidence-section {
+
+            margin-bottom: 30px;
+        }
+
+
+        .section-title {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 12px;
+        }
+
+
+        .section-title h3 {
+
+            font-size: 18px;
+        }
+
+
+        .confidence-value {
+
+            color: #60a5fa;
+
+            font-size: 20px;
+
+            font-weight: bold;
+        }
+
+
+        .progress-container {
+
+            width: 100%;
+
+            height: 18px;
+
+            background: #07111f;
+
+            border: 1px solid #1e3a5f;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+
+        .progress-bar {
+
+            height: 100%;
+
+            width: var(--confidence-width);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            border-radius: 20px;
+
+            transition: width 1s ease;
+        }
+
+
+        /* EMAIL */
+
+        .email-section {
+
+            margin-bottom: 30px;
+        }
+
+
+        .email-section h3 {
+
+            font-size: 18px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .email-box {
+
+            background: #07111f;
+
+            border: 1px solid #1e3a5f;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            color: #cbd5e1;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+            white-space: pre-wrap;
+
+            word-wrap: break-word;
+
+            max-height: 300px;
+
+            overflow-y: auto;
+        }
+
+
+        /* SECURITY MESSAGE */
+
+        .security-tip {
+
+            background: #0f2d4c;
+
+            border-left: 4px solid #2563eb;
+
+            padding: 18px;
+
+            border-radius: 10px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .security-tip h3 {
+
+            color: #60a5fa;
+
+            margin-bottom: 7px;
+
+            font-size: 16px;
+        }
+
+
+        .security-tip p {
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* BUTTONS */
+
+        .buttons {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+        }
+
+
+        .btn {
+
+            display: block;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+
+        .btn-primary {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            color: white;
+        }
+
+
+        .btn-primary:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 25px rgba(
+                    37,
+                    99,
+                    235,
+                    0.35
+                );
+        }
+
+
+        .btn-secondary {
+
+            background: #0b1d33;
+
+            border: 1px solid #2563eb;
+
+            color: #60a5fa;
+        }
+
+
+        .btn-secondary:hover {
+
+            background: #12365d;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* FOOTER */
+
+        footer {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+
+            .result-card {
+                padding: 25px 18px;
+            }
+
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+
+            .result-status h2 {
+                font-size: 24px;
+            }
+
+
+            .buttons {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="logo">
+            🛡️
+        </div>
+
+        <h1>
+            Email Security Analysis
+        </h1>
+
+        <p>
+            AI-Based Phishing Email Detection System
+        </p>
+
+    </div>
+
+
+    <!-- RESULT CARD -->
+
+    <div class="result-card">
+
+
+        <!-- RESULT -->
+
+        {% if prediction == "Phishing" %}
+
+        <div class="result-status phishing">
+
+            <div class="result-icon">
+                🚨
+            </div>
+
+            <h2>
+                Phishing Email Detected
+            </h2>
+
+            <p>
+                This email contains characteristics
+                commonly associated with phishing.
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <div class="result-status legitimate">
+
+            <div class="result-icon">
+                ✅
+            </div>
+
+            <h2>
+                Legitimate Email
+            </h2>
+
+            <p>
+                This email appears to be safe based
+                on the AI model analysis.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- CONFIDENCE -->
+
+        <div class="confidence-section">
+
+            <div class="section-title">
+
+                <h3>
+                    🎯 Detection Confidence
+                </h3>
+
+                <div class="confidence-value">
+                    {{ confidence }}%
+                </div>
+
+            </div>
+
+
+            <div class="progress-container">
+
+                <div
+                    class="progress-bar"
+                    style="--confidence-width: {{ confidence }}%;">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="email-section">
+
+            <h3>
+                📧 Analyzed Email
+            </h3>
+
+            <div class="email-box">
+                {{ email }}
+            </div>
+
+        </div>
+
+
+        <!-- SECURITY TIP -->
+
+        {% if prediction == "Phishing" %}
+
+        <div class="security-tip">
+
+            <h3>
+                ⚠️ Security Recommendation
+            </h3>
+
+            <p>
+                Do not click suspicious links,
+                download unknown attachments,
+                or provide passwords, banking details,
+                or other sensitive information.
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <div class="security-tip">
+
+            <h3>
+                🔒 Security Reminder
+            </h3>
+
+            <p>
+                Even when an email appears legitimate,
+                always verify unexpected requests,
+                links, and attachments before taking action.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <a
+                href="{{ url_for('home') }}"
+                class="btn btn-primary">
+
+                🔍 Analyze Another Email
+
+            </a>
+
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="btn btn-secondary">
+
+                📊 Dashboard
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        AI-Based Phishing Email Detection System
+
+        <br>
+
+        Machine Learning • Flask • BCA Project
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>
