@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About | AI Phishing Detection</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07111f;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 18px 7%;
+            background: rgba(5, 15, 30, 0.95);
+            border-bottom: 1px solid rgba(0, 200, 255, 0.15);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .logo-icon {
+            font-size: 30px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00c8ff;
+        }
+
+        .admin-btn {
+            padding: 10px 17px;
+            border: 1px solid #00c8ff;
+            border-radius: 8px;
+            color: #00c8ff !important;
+        }
+
+        .admin-btn:hover {
+            background: #00c8ff;
+            color: #06101d !important;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 55vh;
+            padding: 90px 7% 70px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            background:
+                radial-gradient(circle at top, rgba(0, 150, 255, 0.18), transparent 45%),
+                linear-gradient(135deg, #07111f, #0a1930);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-bottom: 25px;
+
+            border: 1px solid rgba(0, 255, 170, 0.4);
+            border-radius: 30px;
+
+            color: #00ffb3;
+            background: rgba(0, 255, 170, 0.07);
+
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.1;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #00c8ff;
+        }
+
+        .hero p {
+            max-width: 800px;
+            color: #aebed0;
+            font-size: 17px;
+        }
+
+        /* COMMON */
+        .section {
+            padding: 75px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #9eafc3;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        /* CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            padding: 30px;
+            border-radius: 15px;
+
+            background: linear-gradient(
+                145deg,
+                rgba(17, 37, 62, 0.9),
+                rgba(8, 22, 40, 0.9)
+            );
+
+            border: 1px solid rgba(0, 200, 255, 0.12);
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(0, 200, 255, 0.5);
+        }
+
+        .card-icon {
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #9fb0c4;
+            font-size: 15px;
+        }
+
+        /* MISSION */
+        .mission {
+            background: #091728;
+        }
+
+        .mission-box {
+            max-width: 950px;
+            margin: auto;
+
+            padding: 40px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(0, 120, 255, 0.10),
+                    rgba(0, 255, 200, 0.04)
+                );
+
+            border: 1px solid rgba(0, 200, 255, 0.18);
+
+            text-align: center;
+        }
+
+        .mission-box h2 {
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .mission-box p {
+            color: #aebed0;
+            font-size: 16px;
+        }
+
+        /* TECHNOLOGY */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .tech {
+            padding: 20px;
+
+            background: #0b1b2e;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+
+            text-align: center;
+        }
+
+        .tech strong {
+            display: block;
+            color: #00c8ff;
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .tech span {
+            color: #9eafc3;
+            font-size: 14px;
+        }
+
+        /* WORKFLOW */
+        .workflow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+
+            margin: 0 auto 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #00c8ff;
+            color: #06101d;
+
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #9eafc3;
+            font-size: 14px;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 80px 7%;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(0, 180, 255, 0.13),
+                    transparent 55%
+                );
+        }
+
+        .cta h2 {
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #aebed0;
+            margin-bottom: 25px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            background: #00c8ff;
+            color: #06101d;
+
+            text-decoration: none;
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 200, 255, 0.25);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 25px 7%;
+
+            text-align: center;
+
+            color: #71839a;
+            font-size: 13px;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .workflow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px 5%;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .logo-icon {
+                font-size: 24px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 70px 5%;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .section {
+                padding: 55px 5%;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .tech-grid,
+            .workflow {
+                grid-template-columns: 1fr;
+            }
+
+            .mission-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+
+        <div class="logo">
+            <div class="logo-icon">🛡️</div>
+            <div>AI Phishing Detection</div>
+        </div>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/#features">Features</a>
+            <a href="/#how-it-works">How It Works</a>
+            <a href="/#technology">Technology</a>
+            <a href="/#security">Security Tips</a>
+            <a href="/faq">FAQ</a>
+            <a href="/login" class="admin-btn">🔐 Login</a>
+        </nav>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="status">
+            🟢 AI SECURITY SYSTEM
+        </div>
+
+        <h1>
+            About <span>AI Phishing Detection</span>
+        </h1>
+
+        <p>
+            Learn about our Artificial Intelligence and Machine Learning
+            based system designed to analyze email content and identify
+            potential phishing threats.
+        </p>
+
+    </section>
+
+
+    <!-- ABOUT PROJECT -->
+    <section class="section">
+
+        <div class="section-title">
+            <h2>About the Project</h2>
+
+            <p>
+                AI Phishing Detection is a cybersecurity project that uses
+                Machine Learning and Natural Language Processing techniques
+                to analyze email messages and classify them as legitimate
+                or phishing.
+            </p>
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">🤖</div>
+
+                <h3>Artificial Intelligence</h3>
+
+                <p>
+                    The system uses Artificial Intelligence techniques to
+                    examine email text and identify patterns that may indicate
+                    phishing activity.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">📧</div>
+
+                <h3>Email Analysis</h3>
+
+                <p>
+                    Users can provide email content to the system and receive
+                    an automated prediction indicating whether the message
+                    is legitimate or potentially phishing.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">🛡️</div>
+
+                <h3>Cybersecurity</h3>
+
+                <p>
+                    The project helps users understand suspicious email
+                    patterns and promotes awareness of common phishing
+                    threats.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MISSION -->
+    <section class="section mission">
+
+        <div class="mission-box">
+
+            <h2>🎯 Project Mission</h2>
+
+            <p>
+                The main objective of this project is to provide a simple
+                and intelligent email security system that can assist users
+                in identifying potentially harmful phishing emails.
+                By combining text processing with Machine Learning,
+                the system provides an automated approach to email threat
+                detection.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- TECHNOLOGY -->
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>⚙️ Technology Stack</h2>
+
+            <p>
+                The project combines web development, machine learning,
+                natural language processing and database technologies.
+            </p>
+
+        </div>
+
+
+        <div class="tech-grid">
+
+            <div class="tech">
+                <strong>Python</strong>
+                <span>Programming Language</span>
+            </div>
+
+            <div class="tech">
+                <strong>Flask</strong>
+                <span>Web Framework</span>
+            </div>
+
+            <div class="tech">
+                <strong>TF-IDF</strong>
+                <span>Text Feature Extraction</span>
+            </div>
+
+            <div class="tech">
+                <strong>Logistic Regression</strong>
+                <span>Machine Learning Model</span>
+            </div>
+
+            <div class="tech">
+                <strong>SQLite</strong>
+                <span>Database</span>
+            </div>
+
+            <div class="tech">
+                <strong>HTML & CSS</strong>
+                <span>Web Interface</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- WORKFLOW -->
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>🔄 How the System Works</h2>
+
+            <p>
+                The system follows a simple process to analyze an email
+                and generate a prediction.
+            </p>
+
+        </div>
+
+
+        <div class="workflow">
+
+            <div class="step">
+
+                <div class="step-number">1</div>
+
+                <h3>Email Input</h3>
+
+                <p>
+                    The user provides the email content to the system.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">2</div>
+
+                <h3>Text Processing</h3>
+
+                <p>
+                    The email text is converted into numerical features
+                    using TF-IDF.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">3</div>
+
+                <h3>ML Prediction</h3>
+
+                <p>
+                    The trained Machine Learning model analyzes the
+                    extracted features.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">4</div>
+
+                <h3>Security Result</h3>
+
+                <p>
+                    The system displays the prediction and confidence
+                    information.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECT HIGHLIGHTS -->
+    <section class="section mission">
+
+        <div class="section-title">
+
+            <h2>✨ Project Highlights</h2>
+
+            <p>
+                Important capabilities included in the system.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">⚡</div>
+
+                <h3>Real-Time Analysis</h3>
+
+                <p>
+                    Email content can be analyzed immediately through
+                    the web interface.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">📊</div>
+
+                <h3>Detection History</h3>
+
+                <p>
+                    Previous email predictions can be stored and reviewed
+                    through the administration section.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">🔐</div>
+
+                <h3>Admin Control</h3>
+
+                <p>
+                    The administrator can access system statistics,
+                    detection history and machine learning performance.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta">
+
+        <h2>Ready to Analyze an Email?</h2>
+
+        <p>
+            Use the AI-powered phishing detection system to analyze
+            suspicious email content.
+        </p>
+
+        <a href="/#analyzer" class="cta-btn">
+            🛡️ Analyze Email
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        © 2026 AI Phishing Detection System |
+        BCA Cybersecurity Project
+
+    </footer>
+
+</body>
+</html>

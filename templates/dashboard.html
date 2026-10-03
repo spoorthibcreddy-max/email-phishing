@@ -5,38 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AI Phishing Detection | Dashboard</title>
+    <title>Security Dashboard | AI Phishing Detection</title>
+
+    <meta name="description"
+        content="AI Phishing Detection System security monitoring dashboard.">
 
     <style>
+        /* ==============================
+           GLOBAL
+        ============================== */
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            min-height: 100vh;
-            background:
-                radial-gradient(circle at 10% 0%, #172554 0%, transparent 35%),
-                radial-gradient(circle at 90% 10%, #312e81 0%, transparent 30%),
-                #020617;
-            color: #f8fafc;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* HEADER */
+        body {
+            min-height: 100vh;
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            color: #f8fafc;
+
+            background:
+                radial-gradient(circle at 15% 0%, rgba(37, 99, 235, 0.20), transparent 32%),
+                radial-gradient(circle at 85% 5%, rgba(124, 58, 237, 0.18), transparent 28%),
+                #020617;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* ==============================
+           HEADER
+        ============================== */
 
         .header {
-            background: rgba(2, 6, 23, 0.92);
-            border-bottom: 1px solid rgba(96, 165, 250, 0.20);
-            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(18px);
+
+            padding: 14px 5%;
+
+            background: rgba(2, 6, 23, 0.88);
+            border-bottom: 1px solid rgba(96, 165, 250, 0.18);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         .brand {
@@ -46,228 +69,458 @@
         }
 
         .brand-icon {
-            width: 48px;
-            height: 48px;
+            width: 46px;
+            height: 46px;
+
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
             background: linear-gradient(135deg, #2563eb, #7c3aed);
-            border-radius: 14px;
-            font-size: 25px;
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.30);
+
+            font-size: 23px;
+
+            box-shadow:
+                0 0 25px rgba(59, 130, 246, 0.25);
         }
 
-        .brand h2 {
-            font-size: 18px;
+        .brand-text h2 {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
         }
 
-        .brand p {
-            color: #94a3b8;
-            font-size: 12px;
-            margin-top: 4px;
+        .brand-text p {
+            margin-top: 3px;
+
+            color: #64748b;
+
+            font-size: 11px;
+            letter-spacing: 0.3px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 8px 12px;
+
+            border-radius: 20px;
+
+            color: #4ade80;
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.18);
+
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
         }
 
         .logout {
-            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 9px 14px;
+
             color: #cbd5e1;
-            border: 1px solid #334155;
-            background: rgba(15, 23, 42, 0.65);
-            padding: 10px 16px;
+
+            background: rgba(15, 23, 42, 0.7);
+
+            border: 1px solid #263852;
             border-radius: 9px;
-            font-size: 13px;
-            transition: .25s;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            transition: 0.25s;
         }
 
         .logout:hover {
-            color: white;
-            background: #1e293b;
+            color: #ffffff;
             border-color: #60a5fa;
+            background: #0f1c30;
+            transform: translateY(-1px);
         }
 
-        /* MAIN */
+        /* ==============================
+           MAIN
+        ============================== */
 
         .container {
             width: 92%;
-            max-width: 1250px;
-            margin: 38px auto;
+            max-width: 1280px;
+
+            margin: 40px auto 30px;
         }
 
-        .welcome {
+        /* ==============================
+           PAGE INTRO
+        ============================== */
+
+        .page-intro {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            gap: 25px;
+
             margin-bottom: 28px;
         }
 
-        .welcome small {
-            display: inline-block;
-            color: #60a5fa;
-            background: rgba(37, 99, 235, .10);
-            border: 1px solid rgba(96, 165, 250, .18);
+        .intro-left {
+            max-width: 700px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-bottom: 11px;
             padding: 6px 11px;
+
+            color: #60a5fa;
+
+            background: rgba(37, 99, 235, 0.09);
+            border: 1px solid rgba(96, 165, 250, 0.18);
+
             border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
+
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
             text-transform: uppercase;
-            letter-spacing: .8px;
-            margin-bottom: 12px;
         }
 
-        .welcome h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
+        .page-intro h1 {
+            font-size: clamp(27px, 4vw, 38px);
+            line-height: 1.15;
+            letter-spacing: -1px;
+
+            margin-bottom: 9px;
         }
 
-        .welcome p {
+        .page-intro h1 span {
+            color: #60a5fa;
+        }
+
+        .page-intro p {
             color: #94a3b8;
-            font-size: 14px;
+            font-size: 13px;
+            line-height: 1.7;
         }
 
-        /* STATISTICS */
+        .last-updated {
+            padding: 11px 14px;
+
+            color: #64748b;
+
+            background: rgba(15, 23, 42, 0.65);
+
+            border: 1px solid #172a46;
+            border-radius: 10px;
+
+            font-size: 10px;
+            white-space: nowrap;
+        }
+
+        /* ==============================
+           STATISTICS
+        ============================== */
 
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 17px;
-            margin-bottom: 24px;
+
+            gap: 16px;
+
+            margin-bottom: 22px;
         }
 
         .stat-card {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(
-                145deg,
-                rgba(15, 23, 42, .96),
-                rgba(15, 23, 42, .72)
-            );
+
+            padding: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15, 23, 42, 0.96),
+                    rgba(15, 23, 42, 0.72)
+                );
+
             border: 1px solid #1e3a5f;
             border-radius: 16px;
-            padding: 21px;
-            transition: .3s;
+
+            transition: 0.3s;
+        }
+
+        .stat-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 110px;
+            height: 110px;
+
+            right: -45px;
+            bottom: -50px;
+
+            border-radius: 50%;
+
+            background: var(--glow);
+
+            opacity: 0.08;
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
+
             border-color: #3b82f6;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, .30);
+
+            box-shadow:
+                0 16px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .blue-card {
+            --glow: #3b82f6;
+        }
+
+        .red-card {
+            --glow: #ef4444;
+        }
+
+        .green-card {
+            --glow: #22c55e;
+        }
+
+        .orange-card {
+            --glow: #f97316;
         }
 
         .stat-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             margin-bottom: 18px;
         }
 
         .stat-icon {
-            width: 43px;
-            height: 43px;
+            width: 42px;
+            height: 42px;
+
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+
             border-radius: 11px;
-            font-size: 21px;
-            background: #0f172a;
+
+            background: #0b1526;
+
             border: 1px solid #263852;
+
+            font-size: 19px;
         }
 
-        .stat-status {
+        .stat-label {
             color: #64748b;
-            font-size: 10px;
+
+            font-size: 9px;
+            font-weight: 700;
+
             text-transform: uppercase;
-            letter-spacing: .5px;
+            letter-spacing: 0.7px;
         }
 
         .stat-title {
             color: #94a3b8;
-            font-size: 12px;
-            margin-bottom: 7px;
+
+            font-size: 11px;
+            font-weight: 600;
+
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+
+            margin-bottom: 7px;
         }
 
         .stat-number {
-            font-size: 31px;
-            font-weight: bold;
-            margin-bottom: 6px;
+            font-size: 30px;
+            font-weight: 800;
+
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .blue {
+            color: #60a5fa;
+        }
+
+        .red {
+            color: #f87171;
+        }
+
+        .green {
+            color: #4ade80;
+        }
+
+        .orange {
+            color: #fb923c;
         }
 
         .stat-description {
             color: #64748b;
-            font-size: 11px;
+            font-size: 10px;
         }
 
-        .blue { color: #60a5fa; }
-        .red { color: #f87171; }
-        .green { color: #4ade80; }
-        .orange { color: #fb923c; }
-
-        /* PANELS */
+        /* ==============================
+           PANELS
+        ============================== */
 
         .panel {
-            background: rgba(15, 23, 42, .82);
+            margin-bottom: 20px;
+            padding: 22px;
+
+            background: rgba(15, 23, 42, 0.78);
+
             border: 1px solid #1e3a5f;
             border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 22px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, .20);
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, 0.16);
         }
 
-        .panel-title {
+        .panel-heading {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 23px;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
         }
 
-        .panel-title h2 {
-            font-size: 18px;
+        .panel-heading-left {
+            display: flex;
+            align-items: center;
+            gap: 11px;
         }
 
-        .panel-title span {
+        .panel-heading-icon {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: rgba(37, 99, 235, 0.10);
+            border: 1px solid rgba(96, 165, 250, 0.15);
+
+            font-size: 16px;
+        }
+
+        .panel-heading h2 {
+            font-size: 16px;
+        }
+
+        .panel-heading p {
             color: #64748b;
-            font-size: 12px;
+            font-size: 10px;
+            margin-top: 3px;
         }
 
-        /* ANALYSIS */
+        .panel-badge {
+            color: #60a5fa;
+            font-size: 9px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+        }
+
+        /* ==============================
+           ANALYSIS
+        ============================== */
 
         .analysis {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
+
+            gap: 15px;
         }
 
         .analysis-item {
-            background: rgba(2, 6, 23, .45);
+            padding: 17px;
+
+            background: rgba(2, 6, 23, 0.42);
+
             border: 1px solid #172a46;
             border-radius: 12px;
-            padding: 17px;
         }
 
         .analysis-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             margin-bottom: 11px;
-            font-size: 13px;
         }
 
         .analysis-label {
             color: #cbd5e1;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .analysis-value {
-            font-weight: bold;
+            font-size: 13px;
+            font-weight: 800;
         }
 
         .bar {
-            height: 11px;
-            background: #020617;
-            border-radius: 20px;
+            height: 9px;
+
             overflow: hidden;
+
+            background: #020617;
+
             border: 1px solid #1e293b;
+            border-radius: 20px;
         }
 
         .bar-fill {
             height: 100%;
             width: var(--bar-width);
+
             border-radius: 20px;
+
             transition: width 1s ease;
         }
 
@@ -283,36 +536,43 @@
             background: linear-gradient(90deg, #f59e0b, #ef4444);
         }
 
-        /* ACTIONS */
+        /* ==============================
+           ACTIONS
+        ============================== */
 
         .actions {
             display: flex;
-            gap: 12px;
             flex-wrap: wrap;
-            margin-top: 22px;
+            gap: 10px;
+
+            margin-top: 20px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 7px;
-            text-decoration: none;
-            padding: 11px 17px;
+
+            padding: 10px 15px;
+
             border-radius: 9px;
-            font-size: 13px;
-            font-weight: bold;
-            transition: .25s;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            transition: 0.25s;
+
             border: 1px solid #334155;
         }
 
-        .history {
+        .history-btn {
             color: #60a5fa;
-            background: rgba(37, 99, 235, .09);
+            background: rgba(37, 99, 235, 0.08);
         }
 
-        .performance {
+        .performance-btn {
             color: #a78bfa;
-            background: rgba(124, 58, 237, .09);
+            background: rgba(124, 58, 237, 0.08);
         }
 
         .btn:hover {
@@ -320,35 +580,48 @@
             border-color: #60a5fa;
         }
 
-        /* TABLE */
+        /* ==============================
+           TABLE
+        ============================== */
 
         .table-wrapper {
             overflow-x: auto;
+
             border: 1px solid #172a46;
             border-radius: 12px;
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
             min-width: 700px;
+
+            border-collapse: collapse;
         }
 
         th {
-            text-align: left;
-            color: #64748b;
-            background: #0b1325;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: .5px;
             padding: 13px;
+
+            text-align: left;
+
+            color: #64748b;
+            background: #0a1324;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+
             border-bottom: 1px solid #1e3a5f;
         }
 
         td {
             padding: 14px 13px;
+
             color: #cbd5e1;
-            font-size: 12px;
+
+            font-size: 11px;
+
             border-bottom: 1px solid #172033;
         }
 
@@ -357,131 +630,181 @@
         }
 
         tr:hover td {
-            background: rgba(30, 41, 59, .45);
+            background: rgba(30, 41, 59, 0.42);
         }
 
         .email-text {
-            max-width: 420px;
+            max-width: 440px;
+
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+
+            color: #cbd5e1;
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            padding: 5px 10px;
+
+            padding: 5px 9px;
+
             border-radius: 20px;
-            font-size: 10px;
-            font-weight: bold;
+
+            font-size: 9px;
+            font-weight: 800;
         }
 
         .badge-phishing {
-            background: rgba(239, 68, 68, .12);
             color: #f87171;
-            border: 1px solid rgba(239, 68, 68, .25);
+
+            background: rgba(239, 68, 68, 0.10);
+
+            border: 1px solid rgba(239, 68, 68, 0.22);
         }
 
         .badge-safe {
-            background: rgba(34, 197, 94, .12);
             color: #4ade80;
-            border: 1px solid rgba(34, 197, 94, .25);
+
+            background: rgba(34, 197, 94, 0.10);
+
+            border: 1px solid rgba(34, 197, 94, 0.22);
         }
 
-        /* SECURITY TIP */
+        /* ==============================
+           SECURITY TIP
+        ============================== */
 
         .security-tip {
             display: flex;
             align-items: center;
-            gap: 17px;
-            background: linear-gradient(
-                135deg,
-                rgba(37, 99, 235, .13),
-                rgba(124, 58, 237, .08)
-            );
-            border: 1px solid rgba(59, 130, 246, .25);
+            gap: 15px;
+
+            margin-bottom: 22px;
+            padding: 19px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.12),
+                    rgba(124, 58, 237, 0.07)
+                );
+
+            border: 1px solid rgba(59, 130, 246, 0.22);
             border-radius: 15px;
-            padding: 20px;
         }
 
         .tip-icon {
-            min-width: 48px;
-            height: 48px;
+            min-width: 45px;
+            height: 45px;
+
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
             background: #172554;
-            border-radius: 12px;
-            font-size: 23px;
+
+            font-size: 21px;
         }
 
         .security-tip h3 {
-            font-size: 14px;
+            font-size: 13px;
             margin-bottom: 5px;
         }
 
         .security-tip p {
             color: #94a3b8;
-            font-size: 12px;
-            line-height: 1.6;
+
+            font-size: 11px;
+            line-height: 1.65;
         }
 
-        /* FOOTER */
+        /* ==============================
+           FOOTER
+        ============================== */
 
         footer {
+            padding: 24px 20px 30px;
+
             text-align: center;
+
             color: #475569;
-            font-size: 11px;
-            line-height: 1.7;
-            padding: 20px;
+
+            font-size: 10px;
+            line-height: 1.8;
         }
 
-        /* RESPONSIVE */
+        footer strong {
+            color: #64748b;
+        }
 
-        @media (max-width: 950px) {
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 1000px) {
 
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .page-intro {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
             .analysis {
                 grid-template-columns: 1fr;
             }
+
+            .last-updated {
+                display: none;
+            }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
 
             .header {
-                padding: 13px 18px;
+                padding: 12px 17px;
+            }
+
+            .brand-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .brand-text h2 {
+                font-size: 14px;
+            }
+
+            .brand-text p {
+                font-size: 9px;
+            }
+
+            .system-status {
+                display: none;
+            }
+
+            .logout {
+                padding: 8px 10px;
+                font-size: 10px;
             }
 
             .container {
                 width: 92%;
-                margin: 25px auto;
+                margin: 27px auto;
             }
 
-            .brand-icon {
-                width: 42px;
-                height: 42px;
-                font-size: 21px;
+            .page-intro h1 {
+                font-size: 27px;
             }
 
-            .brand h2 {
-                font-size: 15px;
-            }
-
-            .brand p {
-                font-size: 10px;
-            }
-
-            .logout {
-                padding: 8px 11px;
-                font-size: 11px;
-            }
-
-            .welcome h1 {
-                font-size: 25px;
+            .page-intro p {
+                font-size: 12px;
             }
 
             .stats {
@@ -492,10 +815,20 @@
                 padding: 17px;
             }
 
-            .panel-title {
+            .panel-heading {
                 align-items: flex-start;
-                gap: 8px;
+            }
+
+            .panel-heading h2 {
+                font-size: 14px;
+            }
+
+            .actions {
                 flex-direction: column;
+            }
+
+            .btn {
+                justify-content: center;
             }
 
             .security-tip {
@@ -508,7 +841,9 @@
 
 <body>
 
-    <!-- HEADER -->
+    <!-- ==============================
+         HEADER
+    ============================== -->
 
     <header class="header">
 
@@ -518,55 +853,83 @@
                 🛡️
             </div>
 
-            <div>
+            <div class="brand-text">
 
                 <h2>
                     AI Phishing Detection
                 </h2>
 
                 <p>
-                    Security Administration
+                    Security Intelligence Dashboard
                 </p>
 
             </div>
 
         </div>
 
-        <a href="{{ url_for('logout') }}" class="logout">
-            🚪 Logout
-        </a>
+
+        <div class="header-right">
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+                System Online
+            </div>
+
+            <a href="{{ url_for('logout') }}" class="logout">
+                🚪 Logout
+            </a>
+
+        </div>
 
     </header>
 
 
-    <!-- MAIN -->
+    <!-- ==============================
+         MAIN
+    ============================== -->
 
     <main class="container">
 
-        <!-- WELCOME -->
 
-        <section class="welcome">
+        <!-- PAGE INTRO -->
 
-            <small>
-                🔐 Admin Control Center
-            </small>
+        <section class="page-intro">
 
-            <h1>
-                Security Dashboard
-            </h1>
+            <div class="intro-left">
 
-            <p>
-                Monitor email detection activity and machine learning security results.
-            </p>
+                <div class="eyebrow">
+                    🔐 Secure Monitoring Center
+                </div>
+
+                <h1>
+                    Security <span>Dashboard</span>
+                </h1>
+
+                <p>
+                    Monitor email detection activity, threat levels,
+                    confidence analysis and machine learning security results.
+                </p>
+
+            </div>
+
+
+            <div class="last-updated">
+                ● Live Database Monitoring
+            </div>
 
         </section>
 
 
-        <!-- STATISTICS -->
+        <!-- ==============================
+             STATISTICS
+        ============================== -->
 
         <section class="stats">
 
-            <div class="stat-card">
+
+            <!-- TOTAL -->
+
+            <div class="stat-card blue-card">
 
                 <div class="stat-top">
 
@@ -574,7 +937,7 @@
                         📧
                     </div>
 
-                    <span class="stat-status">
+                    <span class="stat-label">
                         Overall
                     </span>
 
@@ -595,7 +958,9 @@
             </div>
 
 
-            <div class="stat-card">
+            <!-- PHISHING -->
+
+            <div class="stat-card red-card">
 
                 <div class="stat-top">
 
@@ -603,7 +968,7 @@
                         ⚠️
                     </div>
 
-                    <span class="stat-status">
+                    <span class="stat-label">
                         Threat
                     </span>
 
@@ -624,15 +989,17 @@
             </div>
 
 
-            <div class="stat-card">
+            <!-- SAFE -->
+
+            <div class="stat-card green-card">
 
                 <div class="stat-top">
 
                     <div class="stat-icon">
-                        ✅
+                        ✓
                     </div>
 
-                    <span class="stat-status">
+                    <span class="stat-label">
                         Safe
                     </span>
 
@@ -653,7 +1020,9 @@
             </div>
 
 
-            <div class="stat-card">
+            <!-- HIGH RISK -->
+
+            <div class="stat-card orange-card">
 
                 <div class="stat-top">
 
@@ -661,7 +1030,7 @@
                         🔥
                     </div>
 
-                    <span class="stat-status">
+                    <span class="stat-label">
                         Alert
                     </span>
 
@@ -684,24 +1053,45 @@
         </section>
 
 
-        <!-- DETECTION ANALYSIS -->
+        <!-- ==============================
+             DETECTION ANALYSIS
+        ============================== -->
 
         <section class="panel">
 
-            <div class="panel-title">
+            <div class="panel-heading">
 
-                <h2>
-                    📊 Detection Analysis
-                </h2>
+                <div class="panel-heading-left">
 
-                <span>
-                    Current database statistics
+                    <div class="panel-heading-icon">
+                        📊
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Detection Analysis
+                        </h2>
+
+                        <p>
+                            Current database classification overview
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <span class="panel-badge">
+                    Live Statistics
                 </span>
 
             </div>
 
 
             <div class="analysis">
+
+
+                <!-- PHISHING -->
 
                 <div class="analysis-item">
 
@@ -729,12 +1119,14 @@
                 </div>
 
 
+                <!-- SAFE -->
+
                 <div class="analysis-item">
 
                     <div class="analysis-header">
 
                         <span class="analysis-label">
-                            ✅ Safe
+                            ✓ Safe
                         </span>
 
                         <span class="analysis-value green">
@@ -754,6 +1146,8 @@
 
                 </div>
 
+
+                <!-- HIGH RISK -->
 
                 <div class="analysis-item">
 
@@ -783,18 +1177,25 @@
             </div>
 
 
+            <!-- ACTIONS -->
+
             <div class="actions">
 
                 <a
                     href="{{ url_for('history') }}"
-                    class="btn history">
+                    class="btn history-btn">
+
                     📜 Detection History
+
                 </a>
+
 
                 <a
                     href="{{ url_for('model_performance') }}"
-                    class="btn performance">
+                    class="btn performance-btn">
+
                     📈 Model Performance
+
                 </a>
 
             </div>
@@ -802,18 +1203,36 @@
         </section>
 
 
-        <!-- RECENT DETECTIONS -->
+        <!-- ==============================
+             RECENT DETECTIONS
+        ============================== -->
 
         <section class="panel">
 
-            <div class="panel-title">
+            <div class="panel-heading">
 
-                <h2>
-                    🕒 Recent Detections
-                </h2>
+                <div class="panel-heading-left">
 
-                <span>
-                    Latest email analyses
+                    <div class="panel-heading-icon">
+                        🕒
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Recent Detections
+                        </h2>
+
+                        <p>
+                            Latest email analysis activity
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <span class="panel-badge">
+                    Detection Log
                 </span>
 
             </div>
@@ -862,6 +1281,7 @@
 
                             </td>
 
+
                             <td>
 
                                 {% if record['prediction'] == 'Phishing' %}
@@ -880,12 +1300,18 @@
 
                             </td>
 
-                            <td>
-                                {{ record['confidence'] }}%
-                            </td>
 
                             <td>
+
+                                {{ record['confidence'] }}%
+
+                            </td>
+
+
+                            <td>
+
                                 {{ record['created_at'] }}
+
                             </td>
 
                         </tr>
@@ -896,8 +1322,14 @@
 
                             <td
                                 colspan="4"
-                                style="text-align:center; color:#64748b; padding:25px;">
+                                style="
+                                    text-align:center;
+                                    color:#64748b;
+                                    padding:28px;
+                                ">
+
                                 No detection records yet.
+
                             </td>
 
                         </tr>
@@ -913,7 +1345,9 @@
         </section>
 
 
-        <!-- SECURITY TIP -->
+        <!-- ==============================
+             SECURITY TIP
+        ============================== -->
 
         <section class="security-tip">
 
@@ -937,17 +1371,23 @@
 
         </section>
 
+
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- ==============================
+         FOOTER
+    ============================== -->
 
     <footer>
 
-        AI-Based Phishing Email Detection System
+        <strong>
+            AI-Based Phishing Email Detection System
+        </strong>
+
         <br>
 
-        Machine Learning Security Monitoring Dashboard
+        Machine Learning Powered Email Security
 
     </footer>
 

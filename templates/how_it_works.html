@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>How It Works | AI Phishing Detection</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07111f;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 18px 7%;
+            background: rgba(5, 15, 30, 0.96);
+            border-bottom: 1px solid rgba(0, 200, 255, 0.15);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 30px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00c8ff;
+        }
+
+        .admin-btn {
+            padding: 10px 16px;
+            border: 1px solid #00c8ff;
+            border-radius: 8px;
+            color: #00c8ff !important;
+        }
+
+        .admin-btn:hover {
+            background: #00c8ff;
+            color: #06101d !important;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 48vh;
+
+            padding: 85px 7% 70px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(0, 150, 255, 0.18),
+                    transparent 48%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07111f,
+                    #0a1930
+                );
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 8px 16px;
+            margin-bottom: 22px;
+
+            border: 1px solid rgba(0, 255, 170, 0.4);
+            border-radius: 30px;
+
+            color: #00ffb3;
+            background: rgba(0, 255, 170, 0.07);
+
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #00c8ff;
+        }
+
+        .hero p {
+            max-width: 780px;
+            color: #aebed0;
+            font-size: 17px;
+        }
+
+        /* COMMON SECTION */
+        .section {
+            padding: 75px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            max-width: 720px;
+            margin: auto;
+            color: #9eafc3;
+        }
+
+        /* PROCESS */
+        .process {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+
+            align-items: stretch;
+        }
+
+        .process-card {
+            position: relative;
+
+            padding: 28px 18px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(17, 37, 62, 0.95),
+                    rgba(8, 22, 40, 0.95)
+                );
+
+            border: 1px solid rgba(0, 200, 255, 0.13);
+            border-radius: 15px;
+
+            transition: 0.3s;
+        }
+
+        .process-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 200, 255, 0.5);
+        }
+
+        .number {
+            width: 48px;
+            height: 48px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #00c8ff;
+            color: #06101d;
+
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .process-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .process-card h3 {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .process-card p {
+            color: #9eafc3;
+            font-size: 14px;
+        }
+
+        /* ARROWS */
+        .arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+            color: #00c8ff;
+        }
+
+        /* EXPLANATION */
+        .explanation {
+            background: #091728;
+        }
+
+        .explanation-grid {
+            max-width: 1050px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 25px;
+        }
+
+        .info-card {
+            padding: 30px;
+
+            border-radius: 15px;
+
+            background: #0b1b2e;
+
+            border: 1px solid rgba(255, 255, 255, 0.07);
+
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            border-color: rgba(0, 200, 255, 0.35);
+        }
+
+        .info-card h3 {
+            font-size: 21px;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .info-card h3 span {
+            color: #00c8ff;
+        }
+
+        .info-card p {
+            color: #9eafc3;
+            font-size: 15px;
+        }
+
+        /* FLOW DIAGRAM */
+        .flow-container {
+            max-width: 1050px;
+            margin: auto;
+
+            padding: 35px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(0, 120, 255, 0.08),
+                    rgba(0, 255, 200, 0.03)
+                );
+
+            border: 1px solid rgba(0, 200, 255, 0.15);
+
+            border-radius: 18px;
+        }
+
+        .flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .flow-box {
+            min-width: 150px;
+
+            padding: 18px 15px;
+
+            text-align: center;
+
+            background: #0d2138;
+
+            border: 1px solid rgba(0, 200, 255, 0.2);
+
+            border-radius: 10px;
+        }
+
+        .flow-box strong {
+            display: block;
+            color: #00c8ff;
+            margin-bottom: 5px;
+        }
+
+        .flow-box span {
+            color: #9eafc3;
+            font-size: 13px;
+        }
+
+        .flow-arrow {
+            font-size: 24px;
+            color: #00c8ff;
+        }
+
+        /* RESULT */
+        .result-section {
+            background: #091728;
+        }
+
+        .result-grid {
+            max-width: 1000px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 25px;
+        }
+
+        .result-card {
+            padding: 32px;
+
+            border-radius: 15px;
+
+            background: #0b1b2e;
+
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .result-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .result-card p {
+            color: #9eafc3;
+            font-size: 15px;
+        }
+
+        .phishing {
+            border-left: 4px solid #ff5964;
+        }
+
+        .legitimate {
+            border-left: 4px solid #00d9a6;
+        }
+
+        /* SECURITY */
+        .security-box {
+            max-width: 900px;
+            margin: auto;
+
+            text-align: center;
+
+            padding: 40px;
+
+            border-radius: 18px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(0, 180, 255, 0.12),
+                    transparent 60%
+                );
+
+            border: 1px solid rgba(0, 200, 255, 0.15);
+        }
+
+        .security-box h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .security-box p {
+            color: #aebed0;
+            margin-bottom: 25px;
+        }
+
+        .security-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+
+            text-align: left;
+        }
+
+        .security-item {
+            padding: 14px;
+
+            background: rgba(255, 255, 255, 0.03);
+
+            border-radius: 8px;
+
+            color: #cbd5e1;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 80px 7%;
+        }
+
+        .cta h2 {
+            font-size: 34px;
+            margin-bottom: 14px;
+        }
+
+        .cta p {
+            color: #9eafc3;
+            margin-bottom: 25px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            background: #00c8ff;
+            color: #06101d;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 200, 255, 0.25);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 25px 7%;
+
+            text-align: center;
+
+            color: #71839a;
+
+            font-size: 13px;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+
+            .process {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .arrow {
+                display: none;
+            }
+        }
+
+        @media (max-width: 850px) {
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .explanation-grid,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 15px 5%;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .logo-icon {
+                font-size: 24px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 65px 5%;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .section {
+                padding: 55px 5%;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .process {
+                grid-template-columns: 1fr;
+            }
+
+            .security-list {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-container {
+                padding: 25px 15px;
+            }
+
+            .flow {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+
+        <div class="logo">
+            <div class="logo-icon">🛡️</div>
+            <div>AI Phishing Detection</div>
+        </div>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/#features">Features</a>
+            <a href="/#technology">Technology</a>
+            <a href="/#security">Security Tips</a>
+            <a href="/faq">FAQ</a>
+            <a href="/login" class="admin-btn">🔐 Admin Login</a>
+        </nav>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="status">
+            🟢 AI SECURITY SYSTEM ACTIVE
+        </div>
+
+        <h1>
+            How <span>It Works</span>
+        </h1>
+
+        <p>
+            Understand how the AI Phishing Detection System processes
+            email content and uses Machine Learning to identify
+            potentially suspicious messages.
+        </p>
+
+    </section>
+
+
+    <!-- MAIN PROCESS -->
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>🔄 Detection Process</h2>
+
+            <p>
+                The system follows a sequence of steps from receiving
+                an email message to generating the final security result.
+            </p>
+
+        </div>
+
+
+        <div class="process">
+
+            <div class="process-card">
+
+                <div class="number">1</div>
+
+                <div class="process-icon">📧</div>
+
+                <h3>Email Input</h3>
+
+                <p>
+                    The user enters or pastes the email content into
+                    the email analysis interface.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="number">2</div>
+
+                <div class="process-icon">📝</div>
+
+                <h3>Text Processing</h3>
+
+                <p>
+                    The email text is prepared for analysis and converted
+                    into numerical features.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="number">3</div>
+
+                <div class="process-icon">🔢</div>
+
+                <h3>TF-IDF Analysis</h3>
+
+                <p>
+                    TF-IDF converts important words and phrases from
+                    the email into numerical representations.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="number">4</div>
+
+                <div class="process-icon">🤖</div>
+
+                <h3>ML Prediction</h3>
+
+                <p>
+                    The trained Machine Learning model analyzes the
+                    processed email information.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="number">5</div>
+
+                <div class="process-icon">🛡️</div>
+
+                <h3>Security Result</h3>
+
+                <p>
+                    The system displays whether the email is classified
+                    as phishing or legitimate.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DETAILED EXPLANATION -->
+    <section class="section explanation">
+
+        <div class="section-title">
+
+            <h2>🔍 Step-by-Step Explanation</h2>
+
+            <p>
+                Each stage contributes to the final email security analysis.
+            </p>
+
+        </div>
+
+
+        <div class="explanation-grid">
+
+            <div class="info-card">
+
+                <h3>
+                    <span>01.</span> Email Collection
+                </h3>
+
+                <p>
+                    The user provides the content of an email that they
+                    want to check. The system receives the text through
+                    the web application.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>
+                    <span>02.</span> Text Preparation
+                </h3>
+
+                <p>
+                    The email text is prepared for Machine Learning
+                    analysis. The system uses the text as input for
+                    the trained model.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>
+                    <span>03.</span> TF-IDF Feature Extraction
+                </h3>
+
+                <p>
+                    TF-IDF, or Term Frequency-Inverse Document Frequency,
+                    represents words and phrases as numerical features
+                    that can be processed by the Machine Learning model.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>
+                    <span>04.</span> Logistic Regression
+                </h3>
+
+                <p>
+                    The trained Logistic Regression model uses the extracted
+                    text features to classify the email into the available
+                    prediction categories.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>
+                    <span>05.</span> Confidence
+                </h3>
+
+                <p>
+                    The system calculates a confidence value from the model's
+                    prediction probabilities and displays it with the result.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>
+                    <span>06.</span> Result Storage
+                </h3>
+
+                <p>
+                    After analysis, the prediction, email content,
+                    confidence and date information can be stored in
+                    the system history.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FLOW DIAGRAM -->
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>🧩 System Flow</h2>
+
+            <p>
+                A simplified representation of the complete detection pipeline.
+            </p>
+
+        </div>
+
+
+        <div class="flow-container">
+
+            <div class="flow">
+
+                <div class="flow-box">
+                    <strong>Email</strong>
+                    <span>User Input</span>
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-box">
+                    <strong>Processing</strong>
+                    <span>Text Preparation</span>
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-box">
+                    <strong>TF-IDF</strong>
+                    <span>Feature Extraction</span>
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-box">
+                    <strong>ML Model</strong>
+                    <span>Classification</span>
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-box">
+                    <strong>Result</strong>
+                    <span>Security Prediction</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULTS -->
+    <section class="section result-section">
+
+        <div class="section-title">
+
+            <h2>🛡️ Possible Results</h2>
+
+            <p>
+                The system provides a classification based on the
+                trained Machine Learning model.
+            </p>
+
+        </div>
+
+
+        <div class="result-grid">
+
+            <div class="result-card phishing">
+
+                <h3>⚠️ Phishing</h3>
+
+                <p>
+                    The Machine Learning model has classified the email
+                    as phishing based on the learned patterns in the
+                    email content.
+                </p>
+
+            </div>
+
+
+            <div class="result-card legitimate">
+
+                <h3>✅ Legitimate</h3>
+
+                <p>
+                    The Machine Learning model has classified the email
+                    as legitimate based on the learned patterns in the
+                    email content.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SECURITY -->
+    <section class="section">
+
+        <div class="security-box">
+
+            <h2>🔐 Why This System Matters</h2>
+
+            <p>
+                Phishing emails can attempt to trick users into revealing
+                sensitive information or interacting with suspicious content.
+                An automated detection system can provide an additional
+                layer of awareness when reviewing email messages.
+            </p>
+
+
+            <div class="security-list">
+
+                <div class="security-item">
+                    ✓ Analyze suspicious email content
+                </div>
+
+                <div class="security-item">
+                    ✓ Use Machine Learning for classification
+                </div>
+
+                <div class="security-item">
+                    ✓ Display prediction confidence
+                </div>
+
+                <div class="security-item">
+                    ✓ Maintain detection history
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta">
+
+        <h2>Ready to Test an Email?</h2>
+
+        <p>
+            Go to the home page and use the email analyzer.
+        </p>
+
+        <a href="/" class="cta-btn">
+            🛡️ Analyze Email
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        © 2026 AI Phishing Detection System |
+        BCA Cybersecurity Project
+
+    </footer>
+
+</body>
+</html>

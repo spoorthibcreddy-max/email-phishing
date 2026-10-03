@@ -1,300 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AI Phishing Email Detection</title>
+    <title>AI Phishing Detection System</title>
+
+    <meta name="description"
+          content="AI-powered phishing email detection using machine learning and TF-IDF text analysis.">
 
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #07111f;
+            --bg-soft: #0b1728;
+            --card: #0e1b2d;
+            --card-light: #122238;
+            --border: rgba(148, 163, 184, 0.16);
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --blue: #38bdf8;
+            --blue-dark: #0284c7;
+            --green: #22c55e;
+            --danger: #ef4444;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #07111f;
-            color: #f8fafc;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                         BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at 80% 10%, rgba(14, 165, 233, 0.10), transparent 28%),
+                radial-gradient(circle at 15% 45%, rgba(37, 99, 235, 0.07), transparent 30%),
+                var(--bg);
+            color: var(--text);
             min-height: 100vh;
+            line-height: 1.6;
         }
 
-        /* HEADER */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1160px, 92%);
+            margin: auto;
+        }
+
+        /* ================= HEADER ================= */
+
         header {
-            width: 100%;
-            padding: 18px 7%;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            background: rgba(4, 12, 24, 0.96);
-            border-bottom: 1px solid rgba(59, 130, 246, 0.25);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 17, 31, 0.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .logo {
+        .navbar {
+            min-height: 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .brand {
             display: flex;
             align-items: center;
             gap: 12px;
-
-            font-size: 20px;
-            font-weight: 700;
+            flex-shrink: 0;
         }
 
-        .logo-icon {
+        .brand-icon {
             width: 42px;
             height: 42px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(145deg, #0ea5e9, #2563eb);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.18);
+        }
 
+        .brand-icon svg {
+            width: 23px;
+            height: 23px;
+            fill: none;
+            stroke: white;
+            stroke-width: 1.8;
+        }
+
+        .brand-text strong {
+            display: block;
+            font-size: 15px;
+            letter-spacing: 0.2px;
+        }
+
+        .brand-text span {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: -2px;
+        }
+
+        nav {
             display: flex;
             align-items: center;
-            justify-content: center;
-
-            background: linear-gradient(135deg, #2563eb, #06b6d4);
-
-            border-radius: 12px;
-            font-size: 23px;
+            gap: 5px;
         }
 
-        .logo-text span {
-            color: #38bdf8;
+        nav a {
+            color: #aebdce;
+            font-size: 13px;
+            padding: 9px 11px;
+            border-radius: 8px;
+            transition: 0.2s ease;
+            white-space: nowrap;
         }
 
-        .login-btn {
-            text-decoration: none;
+        nav a:hover {
             color: white;
-
-            padding: 11px 18px;
-
-            border-radius: 10px;
-
-            background: linear-gradient(135deg, #2563eb, #4f46e5);
-
-            font-size: 14px;
-            font-weight: bold;
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        /* MAIN */
+        .nav-admin {
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #dff6ff !important;
+            margin-left: 4px;
+        }
+
+        .nav-admin:hover {
+            background: rgba(56, 189, 248, 0.09);
+        }
+
+        /* ================= HERO ================= */
+
         .hero {
-            padding: 70px 7% 50px;
-
-            background:
-                radial-gradient(
-                    circle at 85% 30%,
-                    rgba(37, 99, 235, 0.25),
-                    transparent 35%
-                ),
-                #07111f;
+            padding: 92px 0 75px;
         }
 
-        .hero-content {
-            max-width: 1100px;
-            margin: auto;
-
-            display: flex;
-            flex-direction: column;
-
-            gap: 35px;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            align-items: center;
+            gap: 75px;
         }
 
-        /* TEXT */
-        .hero-text-area {
-            width: 100%;
-        }
-
-        .status {
+        .eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-
-            padding: 9px 15px;
-
-            border-radius: 30px;
-
-            background: rgba(14, 45, 76, 0.8);
-
-            color: #67e8f9;
-
-            font-size: 12px;
-            font-weight: bold;
-
-            margin-bottom: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            background: rgba(56, 189, 248, 0.06);
+            color: #7dd3fc;
+            padding: 7px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
         }
 
         .status-dot {
-            width: 8px;
-            height: 8px;
-
+            width: 7px;
+            height: 7px;
+            background: var(--green);
             border-radius: 50%;
-
-            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.08);
         }
 
-        h1 {
-            font-size: clamp(40px, 6vw, 64px);
-
-            line-height: 1.1;
-
-            margin-bottom: 20px;
+        .hero h1 {
+            font-size: clamp(42px, 5vw, 68px);
+            line-height: 1.02;
+            letter-spacing: -2.8px;
+            max-width: 720px;
+            margin-bottom: 24px;
         }
 
-        h1 .blue {
-            color: #38bdf8;
+        .hero h1 span {
+            color: #5ecbfa;
         }
 
         .hero-description {
-            color: #94a3b8;
-
-            font-size: 18px;
-
-            line-height: 1.7;
-
-            max-width: 800px;
-
-            margin-bottom: 25px;
+            max-width: 610px;
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 34px;
         }
 
-        .hero-points {
+        .hero-buttons {
             display: flex;
+            gap: 12px;
             flex-wrap: wrap;
-            gap: 10px;
         }
 
-        .hero-point {
-            padding: 9px 13px;
-
-            background: rgba(15, 35, 58, 0.75);
-
-            border: 1px solid rgba(96, 165, 250, 0.15);
-
-            border-radius: 8px;
-
-            color: #cbd5e1;
-
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 46px;
+            padding: 0 20px;
+            border-radius: 9px;
             font-size: 13px;
+            font-weight: 700;
+            transition: 0.2s ease;
         }
 
-        /* ANALYZE EMAIL BOX */
-        .analyze-box {
-            width: 100%;
-
-            background: rgba(8, 24, 42, 0.95);
-
-            border: 1px solid rgba(96, 165, 250, 0.25);
-
-            border-radius: 18px;
-
-            padding: 30px;
-
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        .btn-primary {
+            color: white;
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.18);
         }
 
-        .analyze-title {
-            font-size: 24px;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(37, 99, 235, 0.25);
+        }
 
+        .btn-secondary {
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.025);
+            color: #dce6f1;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(148, 163, 184, 0.3);
+        }
+
+        /* ================= SECURITY PANEL ================= */
+
+        .security-panel {
+            position: relative;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: linear-gradient(
+                145deg,
+                rgba(17, 34, 55, 0.95),
+                rgba(8, 20, 35, 0.96)
+            );
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.3),
+                inset 0 1px rgba(255, 255, 255, 0.035);
+        }
+
+        .panel-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-title {
+            font-size: 12px;
+            color: #cbd5e1;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .panel-status {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #86efac;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .shield-area {
+            padding: 35px 0 28px;
+            text-align: center;
+        }
+
+        .shield {
+            width: 112px;
+            height: 112px;
+            margin: auto;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(circle, rgba(14, 165, 233, 0.18), transparent 68%),
+                rgba(14, 165, 233, 0.06);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        .shield svg {
+            width: 54px;
+            height: 54px;
+            fill: none;
+            stroke: #5ecbfa;
+            stroke-width: 1.5;
+        }
+
+        .shield-area h3 {
+            margin-top: 17px;
+            font-size: 19px;
+        }
+
+        .shield-area p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .system-list {
+            display: grid;
+            gap: 9px;
+        }
+
+        .system-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 14px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(148, 163, 184, 0.09);
+            border-radius: 10px;
+        }
+
+        .system-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #cbd5e1;
+            font-size: 12px;
+        }
+
+        .system-icon {
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            border-radius: 7px;
+            background: rgba(56, 189, 248, 0.08);
+            color: #7dd3fc;
+        }
+
+        .system-icon svg {
+            width: 15px;
+            height: 15px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+        }
+
+        .ready {
+            color: #86efac;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* ================= TRUST STRIP ================= */
+
+        .trust-strip {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .trust-item {
+            padding: 25px;
+            text-align: center;
+            border-right: 1px solid var(--border);
+        }
+
+        .trust-item:last-child {
+            border-right: none;
+        }
+
+        .trust-item strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .trust-item span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* ================= FEATURES ================= */
+
+        section {
+            padding: 90px 0;
+        }
+
+        .section-heading {
+            max-width: 650px;
+            margin-bottom: 40px;
+        }
+
+        .section-label {
+            color: #5ecbfa;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
             margin-bottom: 10px;
         }
 
-        .analyze-description {
-            color: #94a3b8;
-
-            line-height: 1.6;
-
-            margin-bottom: 20px;
+        .section-heading h2 {
+            font-size: 34px;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
         }
 
-        textarea {
-            width: 100%;
-
-            min-height: 180px;
-
-            padding: 18px;
-
-            border-radius: 12px;
-
-            border: 1px solid rgba(148, 163, 184, 0.25);
-
-            background: #020817;
-
-            color: white;
-
-            font-size: 15px;
-
-            resize: vertical;
-
-            outline: none;
+        .section-heading p {
+            color: var(--muted);
+            font-size: 14px;
         }
 
-        textarea:focus {
-            border-color: #38bdf8;
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
         }
 
-        .detect-btn {
-            width: 100%;
+        .feature-card {
+            padding: 27px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: rgba(14, 27, 45, 0.62);
+            transition: 0.25s ease;
+        }
 
-            margin-top: 18px;
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.25);
+            background: rgba(18, 34, 56, 0.8);
+        }
 
-            padding: 15px;
+        .feature-number {
+            color: #5ecbfa;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
 
-            border: none;
+        .feature-card h3 {
+            font-size: 17px;
+            margin: 22px 0 9px;
+        }
 
-            border-radius: 12px;
+        .feature-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.75;
+        }
 
-            background: linear-gradient(
-                135deg,
-                #2563eb,
-                #06b6d4
-            );
+        /* ================= WORKFLOW ================= */
 
-            color: white;
+        .workflow-section {
+            background: rgba(255, 255, 255, 0.012);
+            border-top: 1px solid rgba(148, 163, 184, 0.07);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.07);
+        }
 
+        .workflow {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+
+        .step {
+            position: relative;
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--card);
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            border-radius: 9px;
+            background: rgba(56, 189, 248, 0.09);
+            border: 1px solid rgba(56, 189, 248, 0.17);
+            color: #7dd3fc;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .step h3 {
+            margin: 20px 0 8px;
             font-size: 16px;
-
-            font-weight: bold;
-
-            cursor: pointer;
         }
 
-        .detect-btn:hover {
-            opacity: 0.9;
+        .step p {
+            color: var(--muted);
+            font-size: 13px;
         }
 
-        /* MOBILE */
-        @media (max-width: 700px) {
+        /* ================= CTA ================= */
 
-            header {
-                padding: 15px 5%;
+        .cta {
+            padding-top: 35px;
+        }
+
+        .cta-box {
+            position: relative;
+            overflow: hidden;
+            padding: 55px;
+            border-radius: 18px;
+            border: 1px solid rgba(56, 189, 248, 0.17);
+            background:
+                radial-gradient(circle at 90% 50%, rgba(14, 165, 233, 0.11), transparent 32%),
+                linear-gradient(135deg, #0e1d30, #091523);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .cta-box h2 {
+            font-size: 29px;
+            letter-spacing: -0.7px;
+            margin-bottom: 8px;
+        }
+
+        .cta-box p {
+            color: var(--muted);
+            font-size: 13px;
+            max-width: 570px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 80px;
+            border-top: 1px solid var(--border);
+            padding: 30px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-copy {
+            color: #718096;
+            font-size: 11px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 18px;
+        }
+
+        .footer-links a {
+            color: #8191a5;
+            font-size: 11px;
+        }
+
+        .footer-links a:hover {
+            color: #dbeafe;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 45px;
             }
 
-            .logo {
-                font-size: 16px;
+            .security-panel {
+                max-width: 620px;
             }
 
-            .logo-icon {
-                width: 36px;
-                height: 36px;
+            nav {
+                overflow-x: auto;
+                max-width: 55%;
+                scrollbar-width: none;
             }
 
-            .login-btn {
-                padding: 9px 12px;
+            nav::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .navbar {
+                min-height: auto;
+                padding: 14px 0;
+                flex-wrap: wrap;
+            }
+
+            nav {
+                order: 3;
+                width: 100%;
+                max-width: none;
+                justify-content: flex-start;
+                padding-bottom: 3px;
+            }
+
+            nav a {
                 font-size: 12px;
             }
 
             .hero {
-                padding: 45px 5%;
+                padding: 65px 0 55px;
             }
 
-            h1 {
-                font-size: 42px;
+            .hero h1 {
+                font-size: 43px;
+                letter-spacing: -2px;
             }
 
             .hero-description {
-                font-size: 16px;
+                font-size: 15px;
             }
 
-            .analyze-box {
-                padding: 20px;
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-item {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .trust-item:last-child {
+                border-bottom: none;
+            }
+
+            .feature-grid,
+            .workflow {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 65px 0;
+            }
+
+            .section-heading h2 {
+                font-size: 29px;
+            }
+
+            .cta-box {
+                padding: 32px 25px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-text span {
+                display: none;
+            }
+
+            .brand-text strong {
+                font-size: 13px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-buttons {
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .security-panel {
+                padding: 18px;
+            }
+
+            .cta-box h2 {
+                font-size: 25px;
             }
         }
     </style>
@@ -302,109 +711,390 @@
 
 <body>
 
-    <!-- HEADER -->
-    <header>
+<!-- ================= HEADER ================= -->
 
-        <div class="logo">
+<header>
+    <div class="container navbar">
 
-            <div class="logo-icon">
-                🛡️
+        <a href="{{ url_for('home') }}" class="brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 3l7 3v5c0 4.5-2.8 8.2-7 10-4.2-1.8-7-5.5-7-10V6l7-3z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                </svg>
             </div>
 
-            <div class="logo-text">
-                AI <span>Phishing</span> Detection
+            <div class="brand-text">
+                <strong>AI Phishing Detection</strong>
+                <span>Email Security Intelligence</span>
             </div>
-
-        </div>
-
-        <a href="/login" class="login-btn">
-            🔐 Admin Login
         </a>
 
-    </header>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('how_it_works') }}">How It Works</a>
+            <a href="{{ url_for('analyzer') }}">Analyzer</a>
+            <a href="{{ url_for('security_tips') }}">Security Tips</a>
+            <a href="{{ url_for('faq') }}">FAQ</a>
+            <a href="{{ url_for('login') }}" class="nav-admin">Login</a>
+        </nav>
+
+    </div>
+</header>
 
 
-    <!-- MAIN -->
-    <section class="hero">
+<!-- ================= HERO ================= -->
 
-        <div class="hero-content">
+<main>
 
+<section class="hero">
+    <div class="container hero-grid">
 
-            <!-- TEXT COMES FIRST -->
-            <div class="hero-text-area">
+        <div>
 
-                <div class="status">
-                    <span class="status-dot"></span>
-                    AI SECURITY SYSTEM ACTIVE
-                </div>
-
-                <h1>
-                    Detect <span class="blue">Phishing</span><br>
-                    Before It Hurts.
-                </h1>
-
-                <p class="hero-description">
-                    Protect yourself from suspicious emails using
-                    Artificial Intelligence and Machine Learning.
-                    Analyze an email and identify whether it is
-                    legitimate or potentially phishing.
-                </p>
-
-                <div class="hero-points">
-
-                    <div class="hero-point">
-                        ✓ Machine Learning
-                    </div>
-
-                    <div class="hero-point">
-                        ✓ TF-IDF Analysis
-                    </div>
-
-                    <div class="hero-point">
-                        ✓ Real-Time Detection
-                    </div>
-
-                    <div class="hero-point">
-                        ✓ Security Focused
-                    </div>
-
-                </div>
-
+            <div class="eyebrow">
+                <span class="status-dot"></span>
+                AI Security Analysis
             </div>
 
+            <h1>
+                Detect phishing
+                <span>before it becomes a threat.</span>
+            </h1>
 
-            <!-- ANALYZE EMAIL COMES BELOW -->
-            <div class="analyze-box">
+            <p class="hero-description">
+                Analyze suspicious email content using Machine Learning
+                and TF-IDF text analysis to identify potential phishing
+                indicators quickly and clearly.
+            </p>
 
-                <div class="analyze-title">
-                    📧 Analyze Email
-                </div>
+            <div class="hero-buttons">
+                <a href="{{ url_for('analyzer') }}" class="btn btn-primary">
+                    Analyze an Email
+                    <span>→</span>
+                </a>
 
-                <p class="analyze-description">
-                    Paste the email content below and let the
-                    AI model analyze it for phishing indicators.
-                </p>
-
-                <form action="/predict" method="POST">
-
-                    <textarea
-                        name="email"
-                        placeholder="Paste suspicious email content here..."
-                        required></textarea>
-
-                    <button type="submit" class="detect-btn">
-                        🛡 Detect Phishing
-                    </button>
-
-                </form>
-
+                <a href="{{ url_for('how_it_works') }}" class="btn btn-secondary">
+                    Explore the System
+                </a>
             </div>
-
 
         </div>
 
-    </section>
+
+        <!-- SECURITY STATUS PANEL -->
+
+        <div class="security-panel">
+
+            <div class="panel-top">
+                <div class="panel-title">Security Engine</div>
+
+                <div class="panel-status">
+                    <span class="status-dot"></span>
+                    READY
+                </div>
+            </div>
+
+            <div class="shield-area">
+
+                <div class="shield">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 3l7 3v5c0 4.5-2.8 8.2-7 10-4.2-1.8-7-5.5-7-10V6l7-3z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+
+                <h3>Email Threat Analysis</h3>
+
+                <p>
+                    Machine-learning powered classification pipeline
+                </p>
+
+            </div>
+
+            <div class="system-list">
+
+                <div class="system-row">
+                    <div class="system-name">
+                        <div class="system-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3a6 6 0 0 0-6 6v3a6 6 0 0 0 12 0V9a6 6 0 0 0-6-6z"/>
+                                <path d="M9 21h6"/>
+                                <path d="M12 17v4"/>
+                            </svg>
+                        </div>
+                        Machine Learning
+                    </div>
+                    <span class="ready">READY</span>
+                </div>
+
+                <div class="system-row">
+                    <div class="system-name">
+                        <div class="system-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 6h16"/>
+                                <path d="M4 12h16"/>
+                                <path d="M4 18h10"/>
+                            </svg>
+                        </div>
+                        TF-IDF Text Analysis
+                    </div>
+                    <span class="ready">READY</span>
+                </div>
+
+                <div class="system-row">
+                    <div class="system-name">
+                        <div class="system-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 19V5"/>
+                                <path d="M4 19h16"/>
+                                <path d="M7 15l3-4 3 2 5-7"/>
+                            </svg>
+                        </div>
+                        Threat Classification
+                    </div>
+                    <span class="ready">READY</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= TECHNOLOGY STRIP ================= -->
+
+<div class="trust-strip">
+
+    <div class="container trust-grid">
+
+        <div class="trust-item">
+            <strong>TF-IDF</strong>
+            <span>Text feature extraction</span>
+        </div>
+
+        <div class="trust-item">
+            <strong>Logistic Regression</strong>
+            <span>Machine learning classifier</span>
+        </div>
+
+        <div class="trust-item">
+            <strong>Flask</strong>
+            <span>Web application framework</span>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features" id="features">
+
+    <div class="section-label">SYSTEM CAPABILITIES</div>
+
+    <h2>Everything you need to understand an email threat.</h2>
+
+    <p class="section-description">
+        Explore the core capabilities available across the AI phishing
+        email detection system.
+    </p>
+
+    <div class="feature-grid">
+
+        <!-- Feature 01 -->
+        <div class="feature-card">
+            <div class="feature-number">01</div>
+            <div class="feature-tag">DETECTION</div>
+            <h3>Phishing Detection</h3>
+            <p>
+                Analyzes email text and classifies it as phishing or
+                legitimate using the trained machine-learning model.
+            </p>
+        </div>
+
+        <!-- Feature 02 -->
+        <div class="feature-card">
+            <div class="feature-number">02</div>
+            <div class="feature-tag">CONFIDENCE</div>
+            <h3>Confidence Analysis</h3>
+            <p>
+                Displays the model's confidence percentage so users can
+                understand the strength of the prediction.
+            </p>
+        </div>
+
+        <!-- Feature 03 -->
+        <div class="feature-card">
+            <div class="feature-number">03</div>
+            <div class="feature-tag">HISTORY</div>
+            <h3>Detection History</h3>
+            <p>
+                Stores previous analysis results so authorized users can
+                review earlier predictions and detection activity.
+            </p>
+        </div>
+
+        <!-- Feature 04 -->
+        <div class="feature-card">
+            <div class="feature-number">04</div>
+            <div class="feature-tag">DASHBOARD</div>
+            <h3>Admin Dashboard</h3>
+            <p>
+                Provides authorized administrators with system statistics
+                and detection activity in one place.
+            </p>
+        </div>
+
+        <!-- Feature 05 -->
+        <div class="feature-card">
+            <div class="feature-number">05</div>
+            <div class="feature-tag">PERFORMANCE</div>
+            <h3>Model Performance</h3>
+            <p>
+                Displays accuracy, precision, recall, F1-score and
+                confusion-matrix results for the trained model.
+            </p>
+        </div>
+
+        <!-- Feature 06 -->
+        <div class="feature-card">
+            <div class="feature-number">06</div>
+            <div class="feature-tag">SECURITY</div>
+            <h3>Secure Analysis</h3>
+            <p>
+                Provides a dedicated analyzer interface for examining
+                suspicious email content without manual classification.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= WORKFLOW ================= -->
+
+<section class="workflow-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">Detection workflow</div>
+
+            <h2>
+                From email text to security result.
+            </h2>
+
+            <p>
+                The analysis follows a simple three-stage process.
+            </p>
+        </div>
+
+
+        <div class="workflow">
+
+            <div class="step">
+
+                <div class="step-number">01</div>
+
+                <h3>Submit Email</h3>
+
+                <p>
+                    Provide the suspicious email content through the
+                    dedicated email analyzer.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">02</div>
+
+                <h3>Process Text</h3>
+
+                <p>
+                    The text is transformed into numerical features
+                    using the TF-IDF vectorization process.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">03</div>
+
+                <h3>Receive Analysis</h3>
+
+                <p>
+                    The trained machine-learning model provides a
+                    classification and confidence result.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <div>
+                <h2>Have a suspicious email?</h2>
+
+                <p>
+                    Use the dedicated analyzer to examine the email
+                    and view the system's detection result.
+                </p>
+            </div>
+
+            <a href="{{ url_for('analyzer') }}" class="btn btn-primary">
+                Open Email Analyzer
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container footer-inner">
+
+        <div class="footer-copy">
+            © 2026 AI Phishing Detection System. Built for email security analysis.
+        </div>
+
+        <div class="footer-links">
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('security_tips') }}">Security Tips</a>
+            <a href="{{ url_for('faq') }}">FAQ</a>
+            <a href="{{ url_for('login') }}">Login</a>
+        </div>
+
+    </div>
+
+</footer>
 
 </body>
-
 </html>

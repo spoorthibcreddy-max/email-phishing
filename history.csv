@@ -1,0 +1,270 @@
+ID,Sender Email,Email,Prediction,Confidence,Date
+,,,,Congratulations! You have won a $1000 prize. Click the link below immediately to claim your reward. You must verify your account within 24 hours or your account will be suspended.,Phishing
+,,,,"Congratulations! You have won a $1000 prize.
+Click the link immediately to claim your reward.
+Verify your account within 24 hours or your account will be suspended.",Phishing
+,,,,"Hi Rahul,
+
+The meeting has been scheduled for tomorrow at 10:00 AM.
+Please bring the project report with you.
+
+Thank you.",Legitimate
+,,,,"Congratulations! You have won a $1000 prize.
+Click the link immediately to claim your reward.
+Verify your account within 24 hours or your account will be suspended.",Phishing
+,,,,"Hi,
+
+This is a reminder that our project meeting is scheduled for tomorrow at 10:00 AM. Please bring your project updates. Thank you.",Legitimate
+,,,,"Subject: Urgent Account Verification
+
+Dear User,
+
+Your bank account has been temporarily suspended due to suspicious activity.
+
+Click the link below immediately to verify your account and avoid permanent suspension:
+
+http://secure-account-verification.example.com
+
+Enter your username, password, and OTP to restore access.
+
+Act now!
+
+Security Team",Phishing
+,,,,"Congratulations! You have won a $1000 prize.
+Click the link immediately to claim your reward.
+Verify your account within 24 hours.",Phishing
+,,,,"Congratulations! You have won a $1000 prize.
+Click the link immediately to claim your reward.
+Verify your account within 24 hours.",Phishing
+,,,,congratulations! you won a prize. click this link immediately to claim your reward.,Phishing
+,,,,"Congratulations! You have won a $1,000 prize.
+Click the link below immediately to claim your reward.
+Your account will be closed if you do not verify your information today.",Phishing
+,,,,"Hi John,
+
+This is a reminder that our team meeting is scheduled for tomorrow at 10 AM.
+Please bring your project report.
+
+Thank you.",Legitimate
+,,,,"Hello, this is a reminder that our project meeting is scheduled for tomorrow at 10 AM. Please bring your project notes. Thank you.",Legitimate
+,,,,Your bank account will be suspended today. Click the link below immediately to verify your account and confirm your password. Failure to verify will result in permanent account closure.,Phishing
+,,,,Your bank account will be suspended today. Click the link below immediately to verify your account and confirm your password. Failure to verify will result in permanent account closure.,Phishing
+,,,,"Subject: Meeting Reminder
+Hello team, this is a reminder about our project meeting tomorrow at 10 AM. Please attend the meeting on time. Thank you.",Legitimate
+,,,,"Subject: Urgent Account Verification
+Your bank account will be suspended today. Click the link below immediately and confirm your password and account details to avoid account closure.",Phishing
+,,,,"Subject: Meeting Reminder
+Hello, this is a reminder about our meeting tomorrow at 10 AM. Please attend the meeting on time.",Legitimate
+,,,,"Urgent Account Verification
+Your account will be suspended today. Click the link below immediately and verify your account by entering your password and banking details.",Phishing
+,,,,"Urgent Account Verification
+Your account will be suspended today. Click the link below immediately and verify your account by entering your password and banking details.",Phishing
+,,,,"URGENT: Your bank account will be suspended today!
+
+Dear Customer,
+
+Your account has been detected for suspicious activity. You must verify your account immediately to avoid suspension.
+
+Click the link below and enter your username, password, and bank details:
+
+http://secure-account-verification.example.com
+
+You have only 24 hours to complete the verification.
+
+Thank you,
+Bank Security Team",Phishing
+,,,,"URGENT: Your bank account will be suspended today!
+
+Dear Customer,
+
+Your account has been detected for suspicious activity. You must verify your account immediately to avoid suspension.
+
+Click the link below and enter your username, password, and bank details:
+
+http://secure-account-verification.example.com
+
+You have only 24 hours to complete the verification.
+
+Thank you,
+Bank Security Team",Phishing
+,,,,"URGENT: Your account will be suspended!
+
+Dear Customer,
+
+We detected unusual activity on your account.
+
+To prevent your account from being suspended, you must verify your account immediately.
+
+Click here to verify:
+http://example.com/verify-account
+
+Please provide your username and password to complete the verification.
+
+You have 24 hours to complete this process.
+
+Thank you,
+Account Security Team",Phishing
+,,,,"Subject: Meeting Reminder
+
+Hello Team,
+
+This is a reminder that our project meeting is scheduled for tomorrow at 10:00 AM in the conference room.
+
+Please bring your project updates and discuss the tasks completed this week.
+
+Thank you,
+Project Coordinator",Legitimate
+,,,,"Subject: Meeting Reminder
+
+Hello Team,
+
+This is a reminder that our project meeting is scheduled for tomorrow at 10:00 AM in the conference room.
+
+Please bring your project updates and discuss the tasks completed this week.
+
+Thank you,
+Project Coordinator",Legitimate
+,,,,"Subject: Project Meeting
+
+Hello Team,
+
+This is a reminder that our project meeting will be held tomorrow at 10 AM.
+Please bring your project updates and be prepared to discuss your progress.
+
+Thank you.",Legitimate
+,,,,"Subject: URGENT! Your Bank Account Will Be Suspended
+
+Dear Customer,
+
+Your bank account will be suspended today due to a security issue.
+
+You must verify your account immediately by clicking the link below:
+
+http://example.com/verify
+
+Enter your username, password and banking details to confirm your identity.
+
+Failure to verify your account will result in permanent suspension.
+
+Thank you,
+Bank Security Team",Phishing
+,,,,"URGENT: Your bank account will be blocked.
+Click the link below to verify your account immediately.",Phishing
+,,,,"Subject: Project Meeting
+
+Hello Team,
+
+We will have our project meeting tomorrow at 10 AM in the seminar hall.
+Please bring your project work for discussion.
+
+Thank you.",Legitimate
+,,,,"Subject: Project Meeting
+
+Hello Team,
+
+We will have our project meeting tomorrow at 10 AM in the seminar hall.
+Please bring your project work for discussion.
+
+Thank you.",Legitimate
+,,,,"Subject: Urgent: Verify Your Bank Account
+
+Dear Customer,
+
+Your bank account will be suspended today unless you verify your account immediately.
+
+Click the link below to verify your account:
+http://example.com/login
+
+Please provide your username, password, and banking details.
+
+Thank you,
+Bank Security Team",Phishing
+,,,,"Subject: Urgent: Verify Your Bank Account
+
+Dear Customer,
+
+Your bank account will be suspended today unless you verify your account immediately.
+
+Click the link below to verify your account:
+http://example.com/login
+
+Please provide your username, password, and banking details.
+
+Thank you,
+Bank Security Team",Phishing
+,,,,"Subject: Urgent: Verify Your Bank Account
+
+Dear Customer,
+
+Your bank account will be suspended today unless you verify your account immediately.
+
+Click the link below to verify your account:
+http://example.com/login
+
+Please provide your username, password, and banking details.
+
+Thank you,
+Bank Security Team",Phishing
+,,,,"Subject: Project Meeting
+Hello Team, We will have our project meeting tomorrow at 10 AM in the seminar hall. Please bring your project work for discussion. Thank you.",Legitimate
+,,,,"Subject: Urgent: Verify Your Bank Account
+
+Dear Customer, Your bank account will be suspended today unless you verify your account immediately. Click the link below to verify your account: http://example.com/login
+
+Please provide your username, password, and banking details.
+
+Thank you,
+Bank Security Team",Phishing
+,,,,"Subject: Urgent: Verify Your Bank Account
+
+Dear Customer, Your bank account will be suspended today unless you verify your account immediately. Click the link below to verify your account: http://example.com/login
+
+Please provide your username, password, and banking details.
+
+Thank you,
+Bank Security Team",Phishing
+,,,,"URGENT! Your bank account will be blocked today.
+Please verify your account immediately by clicking this link:
+http://example.com/login",Phishing
+,,,,"URGENT! Your bank account has been suspended.
+Verify your account immediately by clicking this link:
+http://example.com/login
+Failure to verify will result in permanent account closure.",Phishing
+,,,,"Subject: Urgent Account Verification
+
+Dear Customer,
+
+Your account requires immediate verification.
+Please verify your account within 24 hours to avoid suspension.
+
+Click here to verify your account:
+http://example.com/login
+
+Thank you.",Phishing
+,,,,hi i am mugeshwari call me,Legitimate
+,,,,"hi i am mugeshari calling from hdfc bank 
+click the link below to apply for loan
+https://erfdchgfeh.com/mtz?5437",Phishing
+,,,,im in sfgc clg,Legitimate
+,,,,im in sfgc link https://goog.com,Legitimate
+,,,,i am doing forgery,Legitimate
+,,,,hi iam email,Legitimate
+,,,,hi i am sonu,Legitimate
+,,,,hi i am abcd   call me 435766688,Legitimate
+,,,,hi,Legitimate
+,,,,hiii,Legitimate
+,,,,Your bank account has been suspended. Verify your identity immediately or your account will be permanently closed. Please provide your OTP and password to complete the verification.,Phishing
+,,,,Please visit our website at https://example.com to read our monthly newsletter and company updates.,Legitimate
+,,,,"Hi Team,
+Please attend tomorrow's project meeting at 10 AM. We will discuss the project progress, upcoming tasks, and submission schedule.
+Thank you.",Legitimate
+,,,,Your invoice is attached to this email. Please download the attachment and open the file immediately to avoid cancellation of your order. Your account may be suspended if you do not complete the verification.,Phishing
+,,,,Microsoft Support: We detected unusual activity on your account. Please verify your identity immediately to prevent your account from being permanently locked.,Phishing
+,,,,Microsoft Support: Your monthly security newsletter is now available. You can read the latest information about account security and new features on our official website. Thank you for staying informed.,Legitimate
+,,,,Your bank account has been suspended. Verify your identity immediately or your account will be permanently closed. Please provide your OTP and password to complete the verification.,Phishing
+,,,,Please visit our website at https://example.com to read our monthly newsletter and company updates.,Legitimate
+,,,,hiiiii,Legitimate
+,,spoorthi@gmail.com,support@bank-example.com,"1.
+   URGENT! Your bank account has been suspended. Verify your account immediately by clicking this link and enter your OTP and password.",Phishing
+,spoorthi@gamil.com,"im going to collge http/
+127.0.1.5000",Legitimate,58.61,2026-10-03 20:11:22

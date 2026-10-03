@@ -575,6 +575,35 @@
 
         </div>
 
+        <!-- DETECTION REASONS -->
+
+        {% if reasons %}
+
+        <div class="email-section">
+
+            <h3>
+               🔎 Detection Analysis
+            </h3>
+
+            <div class="email-box">
+
+               <ul style="padding-left: 20px; line-height: 1.8;">
+
+                   {% for reason in reasons %}
+
+                   <li>
+                      {{ reason }}
+                   </li>
+
+                   {% endfor %}
+
+                </ul>
+
+            </div>
+
+        </div>
+
+     {% endif %}   
 
         <!-- SECURITY TIP -->
 

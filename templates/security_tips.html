@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Security Tips | AI Phishing Detection</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, #12345a 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #071d35 0%, transparent 40%),
+                #020b16;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(2, 11, 22, 0.9);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        .login-btn {
+            padding: 10px 18px;
+            border: 1px solid #38bdf8;
+            border-radius: 8px;
+            color: #38bdf8;
+        }
+
+        .login-btn:hover {
+            background: #38bdf8;
+            color: #020b16;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px 50px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: rgba(56,189,248,0.1);
+            border: 1px solid rgba(56,189,248,0.3);
+            color: #38bdf8;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: auto;
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        .tips-container {
+            width: 86%;
+            max-width: 1150px;
+            margin: 20px auto 80px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .tip-card {
+            background: rgba(10, 27, 47, 0.85);
+            border: 1px solid rgba(56,189,248,0.15);
+            border-radius: 18px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56,189,248,0.5);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .icon {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: rgba(56,189,248,0.1);
+            font-size: 27px;
+            margin-bottom: 20px;
+        }
+
+        .tip-card h2 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .tip-card p {
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .warning-section {
+            width: 86%;
+            max-width: 1150px;
+            margin: 0 auto 70px;
+            padding: 35px;
+            border-radius: 18px;
+            background: linear-gradient(
+                135deg,
+                rgba(127,29,29,0.35),
+                rgba(30,41,59,0.8)
+            );
+            border: 1px solid rgba(248,113,113,0.25);
+        }
+
+        .warning-section h2 {
+            margin-bottom: 15px;
+            color: #fca5a5;
+        }
+
+        .warning-section p {
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .checklist {
+            width: 86%;
+            max-width: 1150px;
+            margin: 0 auto 80px;
+            padding: 40px;
+            background: rgba(10,27,47,0.8);
+            border-radius: 18px;
+            border: 1px solid rgba(56,189,248,0.15);
+        }
+
+        .checklist h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .check-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .check-item:last-child {
+            border-bottom: none;
+        }
+
+        .check {
+            color: #22c55e;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .cta {
+            text-align: center;
+            padding: 70px 20px;
+            background: rgba(3,15,28,0.9);
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .cta h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+
+        .cta a {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 10px;
+            background: #38bdf8;
+            color: #020b16;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .cta a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(56,189,248,0.25);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        @media (max-width: 850px) {
+
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .tips-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🛡️ AI <span>Phishing Detection</span>
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/analyzer">Email Analyzer</a>
+        <a href="/security-tips">Security Tips</a>
+        <a href="/faq">FAQ</a>
+        <a href="/login" class="login-btn">Admin Login</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="badge">
+        🔐 CYBERSECURITY AWARENESS
+    </div>
+
+    <h1>
+        Stay Safe From <span>Phishing</span>
+    </h1>
+
+    <p>
+        Phishing attacks attempt to trick users into revealing sensitive
+        information. Follow these security practices to recognize suspicious
+        emails and protect your digital identity.
+    </p>
+
+</section>
+
+
+<section class="tips-container">
+
+    <div class="tip-card">
+        <div class="icon">🔗</div>
+        <h2>Check Suspicious Links</h2>
+        <p>
+            Before clicking a link, check where it leads. Be careful with
+            shortened URLs, unfamiliar domains, and links asking for sensitive
+            information.
+        </p>
+    </div>
+
+
+    <div class="tip-card">
+        <div class="icon">📧</div>
+        <h2>Verify the Sender</h2>
+        <p>
+            Carefully examine the sender's email address. Attackers may use
+            addresses that look similar to legitimate organizations.
+        </p>
+    </div>
+
+
+    <div class="tip-card">
+        <div class="icon">⚠️</div>
+        <h2>Watch for Urgent Messages</h2>
+        <p>
+            Be cautious when an email creates panic or pressure by demanding
+            immediate payment, verification, login, or account recovery.
+        </p>
+    </div>
+
+
+    <div class="tip-card">
+        <div class="icon">🔑</div>
+        <h2>Protect Your Passwords</h2>
+        <p>
+            Never share passwords or one-time verification codes through
+            unexpected emails. Use strong and unique passwords for important
+            accounts.
+        </p>
+    </div>
+
+
+    <div class="tip-card">
+        <div class="icon">🏦</div>
+        <h2>Verify Financial Requests</h2>
+        <p>
+            If an email asks for banking information, payment, or account
+            verification, independently contact the organization using its
+            official website or known contact details.
+        </p>
+    </div>
+
+
+    <div class="tip-card">
+        <div class="icon">📎</div>
+        <h2>Be Careful With Attachments</h2>
+        <p>
+            Avoid opening unexpected attachments. Malicious files can contain
+            software designed to compromise your device or information.
+        </p>
+    </div>
+
+
+    <div class="tip-card">
+        <div class="icon">🛡️</div>
+        <h2>Keep Software Updated</h2>
+        <p>
+            Keep your operating system, browser, security software, and
+            applications updated to reduce exposure to known vulnerabilities.
+        </p>
+    </div>
+
+
+    <div class="tip-card">
+        <div class="icon">🤖</div>
+        <h2>Use AI Email Analysis</h2>
+        <p>
+            When an email looks suspicious, use the AI Email Analyzer in this
+            system to examine the message and receive a phishing prediction.
+        </p>
+    </div>
+
+</section>
+
+
+<section class="warning-section">
+
+    <h2>🚨 Never Trust Pressure Alone</h2>
+
+    <p>
+        Phishing messages often use urgency, fear, rewards, threats, or
+        unexpected requests to make people act quickly. Stop, verify the
+        information independently, and avoid sharing sensitive information
+        until you are confident that the request is legitimate.
+    </p>
+
+</section>
+
+
+<section class="checklist">
+
+    <h2>✅ Quick Security Checklist</h2>
+
+    <div class="check-item">
+        <span class="check">✓</span>
+        <span>Did I recognize the sender?</span>
+    </div>
+
+    <div class="check-item">
+        <span class="check">✓</span>
+        <span>Does the email address look legitimate?</span>
+    </div>
+
+    <div class="check-item">
+        <span class="check">✓</span>
+        <span>Is the message creating unnecessary urgency?</span>
+    </div>
+
+    <div class="check-item">
+        <span class="check">✓</span>
+        <span>Did I verify the link before clicking?</span>
+    </div>
+
+    <div class="check-item">
+        <span class="check">✓</span>
+        <span>Is the attachment expected?</span>
+    </div>
+
+    <div class="check-item">
+        <span class="check">✓</span>
+        <span>Am I being asked for passwords, OTPs, or financial information?</span>
+    </div>
+
+    <div class="check-item">
+        <span class="check">✓</span>
+        <span>Should I analyze this email before taking action?</span>
+    </div>
+
+</section>
+
+
+<section class="cta">
+
+    <h2>Have a Suspicious Email?</h2>
+
+    <p>
+        Analyze the email using the AI-powered phishing detection system.
+    </p>
+
+    <a href="/analyzer">
+        🔍 Analyze Email
+    </a>
+
+</section>
+
+
+<footer>
+
+    © 2026 AI Phishing Email Detection System |
+    Built for Cybersecurity Awareness
+
+</footer>
+
+</body>
+</html>

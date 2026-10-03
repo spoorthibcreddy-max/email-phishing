@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FAQ | AI Phishing Detection</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, #12345a 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #071d35 0%, transparent 40%),
+                #020b16;
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(2, 11, 22, 0.92);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        .login-btn {
+            padding: 9px 16px;
+            border: 1px solid #38bdf8;
+            border-radius: 8px;
+            color: #38bdf8;
+        }
+
+        .login-btn:hover {
+            background: #38bdf8;
+            color: #020b16;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px 50px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(56,189,248,0.1);
+            border: 1px solid rgba(56,189,248,0.3);
+            color: #38bdf8;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: auto;
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        .faq-container {
+            width: 86%;
+            max-width: 950px;
+            margin: 20px auto 80px;
+        }
+
+        .faq-item {
+            background: rgba(10, 27, 47, 0.88);
+            border: 1px solid rgba(56,189,248,0.15);
+            border-radius: 16px;
+            margin-bottom: 18px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(56,189,248,0.45);
+        }
+
+        .question {
+            padding: 23px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .question h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .plus {
+            font-size: 25px;
+            color: #38bdf8;
+            transition: 0.3s;
+        }
+
+        .answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .answer p {
+            padding: 0 25px 24px;
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .faq-item.active .answer {
+            max-height: 300px;
+        }
+
+        .faq-item.active .plus {
+            transform: rotate(45deg);
+        }
+
+        .cta {
+            text-align: center;
+            padding: 70px 20px;
+            background: rgba(3,15,28,0.9);
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .cta h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+
+        .cta a {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 10px;
+            background: #38bdf8;
+            color: #020b16;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        @media (max-width: 850px) {
+
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🛡️ AI <span>Phishing Detection</span>
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/analyzer">Email Analyzer</a>
+        <a href="/security-tips">Security Tips</a>
+        <a href="/faq">FAQ</a>
+        <a href="/login" class="login-btn">Admin Login</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="badge">
+        ❓ FREQUENTLY ASKED QUESTIONS
+    </div>
+
+    <h1>
+        Frequently Asked <span>Questions</span>
+    </h1>
+
+    <p>
+        Find answers to common questions about phishing emails,
+        artificial intelligence, email analysis, and this security system.
+    </p>
+
+</section>
+
+
+<section class="faq-container">
+
+
+    <div class="faq-item">
+
+        <div class="question">
+            <h2>What is phishing?</h2>
+            <span class="plus">+</span>
+        </div>
+
+        <div class="answer">
+            <p>
+                Phishing is a type of cyber attack where attackers attempt
+                to trick people into revealing sensitive information such as
+                passwords, financial information, or account credentials.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="question">
+            <h2>What does this project do?</h2>
+            <span class="plus">+</span>
+        </div>
+
+        <div class="answer">
+            <p>
+                This project is an AI-based phishing email detection system.
+                It analyzes the content of an email and predicts whether
+                the email is likely to be phishing or legitimate.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="question">
+            <h2>How does the AI detect phishing emails?</h2>
+            <span class="plus">+</span>
+        </div>
+
+        <div class="answer">
+            <p>
+                The system uses machine learning and TF-IDF text analysis.
+                The email text is converted into numerical features and
+                processed by the trained machine learning model.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="question">
+            <h2>What is TF-IDF?</h2>
+            <span class="plus">+</span>
+        </div>
+
+        <div class="answer">
+            <p>
+                TF-IDF stands for Term Frequency-Inverse Document Frequency.
+                It is a text-processing technique that helps identify
+                important words and phrases in documents.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="question">
+            <h2>What machine learning algorithm is used?</h2>
+            <span class="plus">+</span>
+        </div>
+
+        <div class="answer">
+            <p>
+                The project uses Logistic Regression together with a
+                TF-IDF vectorizer to classify email messages.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="question">
+            <h2>Can the system guarantee that an email is safe?</h2>
+            <span class="plus">+</span>
+        </div>
+
+        <div class="answer">
+            <p>
+                No. Machine learning predictions are not a guarantee.
+                The result should be treated as a security indicator.
+                Users should also verify suspicious emails independently.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="question">
+            <h2>What should I do if an email is detected as phishing?</h2>
+            <span class="plus">+</span>
+        </div>
+
+        <div class="answer">
+            <p>
+                Avoid clicking links or opening unexpected attachments.
+                Do not provide passwords, OTPs, or financial information.
+                Verify the request through an official communication channel.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="question">
+            <h2>Does the system store analyzed emails?</h2>
+            <span class="plus">+</span>
+        </div>
+
+        <div class="answer">
+            <p>
+                The application records prediction history so that
+                administrators can review previous analyses through the
+                administration dashboard.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="question">
+            <h2>Who can access the administration dashboard?</h2>
+            <span class="plus">+</span>
+        </div>
+
+        <div class="answer">
+            <p>
+                The administration area is protected by an admin login.
+                Authorized users can access the dashboard, detection history,
+                and model performance information.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="question">
+            <h2>Can I analyze an email without opening the admin dashboard?</h2>
+            <span class="plus">+</span>
+        </div>
+
+        <div class="answer">
+            <p>
+                Yes. The Email Analyzer page provides a dedicated interface
+                for submitting an email for phishing analysis.
+            </p>
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<section class="cta">
+
+    <h2>Have a Suspicious Email?</h2>
+
+    <p>
+        Use the AI Email Analyzer to check the message.
+    </p>
+
+    <a href="/analyzer">
+        🔍 Analyze Email
+    </a>
+
+</section>
+
+
+<footer>
+
+    © 2026 AI Phishing Email Detection System |
+    Built for Cybersecurity Awareness
+
+</footer>
+
+
+<script>
+
+    const questions = document.querySelectorAll(".question");
+
+    questions.forEach(question => {
+
+        question.addEventListener("click", () => {
+
+            const item = question.parentElement;
+
+            item.classList.toggle("active");
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
